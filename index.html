@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>~/ portfolio</title>
+<meta name="description" content="Projects, notes, and writing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="grain"></div>
+<div class="scanline"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <a href="#top" class="brand">
+    <span class="brand-prompt">$</span> <span class="brand-name" data-text="oswin">oswin</span><span class="cursor">_</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#projects">/projects</a>
+    <a href="#about">/about</a>
+    <a href="#content">/notes</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <p class="hero-kicker">// building &amp; documenting in public</p>
+    <h1 class="hero-title">
+      <span class="line">Oswin Franco Cervantes</span>
+      <span class="line accent">lifelong learner.</span>
+    </h1>
+    <p class="hero-sub">
+      A living workspace — shipped projects, a bit about me, and a
+      constantly growing pile of notes. Drop a file, push, it appears below.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">view projects →</a>
+      <a href="#content" class="btn btn-ghost">read notes</a>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <span class="blink">●</span> status: online
+    <span class="sep">·</span> last build: <span id="build-time">—</span>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="section">
+  <div class="section-head">
+    <span class="section-no">01</span>
+    <h2 class="section-title">Projects</h2>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="projects" id="projects-grid">
+    <!-- EDIT THESE: each .project is one card -->
+    <article class="project">
+      <div class="project-top">
+        <span class="project-idx">01</span>
+        <span class="project-tags">React · Node</span>
+      </div>
+      <h3 class="project-name">Project One</h3>
+      <p class="project-desc">A short description of what this project does and why it matters. Swap this text in index.html.</p>
+      <div class="project-links">
+        <a href="#" target="_blank" rel="noopener">code ↗</a>
+        <a href="#" target="_blank" rel="noopener">live ↗</a>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-top">
+        <span class="project-idx">02</span>
+        <span class="project-tags">Python · ML</span>
+      </div>
+      <h3 class="project-name">Project Two</h3>
+      <p class="project-desc">Another project. Describe the problem you solved and the stack you used.</p>
+      <div class="project-links">
+        <a href="#" target="_blank" rel="noopener">code ↗</a>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-top">
+        <span class="project-idx">03</span>
+        <span class="project-tags">Rust · CLI</span>
+      </div>
+      <h3 class="project-name">Project Three</h3>
+      <p class="project-desc">Keep adding cards by copying one of these &lt;article&gt; blocks.</p>
+      <div class="project-links">
+        <a href="#" target="_blank" rel="noopener">code ↗</a>
+        <a href="#" target="_blank" rel="noopener">live ↗</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section">
+  <div class="section-head">
+    <span class="section-no">02</span>
+    <h2 class="section-title">About</h2>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="about">
+    <div class="about-card">
+      <pre class="about-code">
+<span class="c-key">const</span> <span class="c-var">me</span> = {
+  <span class="c-prop">name</span>:    <span class="c-str">"Oswin Franco Cervantes"</span>,
+  <span class="c-prop">role</span>:    <span class="c-str">"Physics + EE w/ Computing @ MIT"</span>,
+  <span class="c-prop">focus</span>:   [<span class="c-str">"systems"</span>, <span class="c-str">"signals"</span>, <span class="c-str">"electromagnetics"</span>],
+  <span class="c-prop">based</span>:   <span class="c-str">"Cambridge, MA"</span>,
+  <span class="c-prop">stack</span>:   [<span class="c-str">"Python"</span>, <span class="c-str">"C"</span>, <span class="c-str">"MATLAB"</span>, <span class="c-str">"RISC-V"</span>],
+  <span class="c-prop">status</span>:  <span class="c-str">"always learning"</span>,
+};</pre>
+    </div>
+    <div class="about-prose">
+      <p>Hi — I'm <strong>Oswin Franco Cervantes</strong>, an undergraduate at MIT studying Physics and Electrical Engineering with Computing. I'm drawn to systems, signals, and electromagnetics — the places where hardware and computation meet.</p>
+      <p>I like working across that whole stack, from circuit design to simulation to low-level programming, and I'm always trying to learn something new. This site is where I keep my projects, a bit about me, and a growing collection of notes.</p>
+      <div class="about-links">
+        <a href="https://github.com/Ofcervantes" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="mailto:cervanteso@acm.org">Email ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTENT / NOTES ============ -->
+<section id="content" class="section">
+  <div class="section-head">
+    <span class="section-no">03</span>
+    <h2 class="section-title">Notes</h2>
+    <span class="section-line"></span>
+  </div>
+
+  <p class="notes-intro">
+    A living archive. Drop a <code>.pdf</code> or <code>.md</code> file into the
+    <code>/notes</code> folder, push, and it shows up here automatically.
+  </p>
+
+  <div class="notes-toolbar">
+    <input type="search" id="notes-search" placeholder="search notes…" autocomplete="off">
+    <div class="notes-filters" id="notes-filters"></div>
+  </div>
+
+  <div class="notes-list" id="notes-list">
+    <p class="notes-loading">loading notes…</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ MARKDOWN VIEWER ============ -->
+<div class="viewer" id="viewer" aria-hidden="true">
+  <div class="viewer-bar">
+    <span class="viewer-title" id="viewer-title"></span>
+    <button class="viewer-close" id="viewer-close">esc ✕</button>
+  </div>
+  <div class="viewer-body" id="viewer-body"></div>
+</div>
+
+<footer class="footer">
+  <span>© <span id="year"></span> Oswin Franco Cervantes</span>
+  <span>built &amp; hosted on GitHub</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
