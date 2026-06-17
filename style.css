@@ -18,6 +18,11 @@
   --maxw: 1080px;
 }
 
+.project-tags .tag-sep {
+  margin: 0 0.4em;
+  opacity: 0.5;
+}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
@@ -131,7 +136,7 @@ code{font-family:var(--mono)}
 .section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border-hi),transparent)}
 
 /* ============ PROJECTS ============ */
-.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:18px}
 .project{
   background:var(--panel);border:1px solid var(--border);border-radius:3px;
   padding:24px;transition:all .25s;position:relative;overflow:hidden;
@@ -142,7 +147,7 @@ code{font-family:var(--mono)}
 }
 .project:hover{border-color:var(--border-hi);transform:translateY(-4px);background:var(--bg-soft)}
 .project:hover::before{width:100%}
-.project-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.project-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
 .project-idx{color:var(--text-faint);font-size:12px;font-weight:700}
 .project-tags{color:var(--accent-2);font-size:11.5px;letter-spacing:.5px}
 .project-name{font-family:var(--serif);font-size:1.5rem;font-weight:500;margin-bottom:10px}
