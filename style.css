@@ -136,7 +136,7 @@ code{font-family:var(--mono)}
 .section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border-hi),transparent)}
 
 /* ============ PROJECTS ============ */
-.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:18px}
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:18px}
 .project{
   background:var(--panel);border:1px solid var(--border);border-radius:3px;
   padding:24px;transition:all .25s;position:relative;overflow:hidden;
