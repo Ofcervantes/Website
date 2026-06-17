@@ -157,19 +157,25 @@ code{font-family:var(--mono)}
 .project-links a:hover{opacity:.65}
 
 /* ============ ABOUT ============ */
-.about{display:grid;grid-template-columns:minmax(0,.85fr) 1fr;gap:36px;align-items:start}
-.about-card{
-  background:var(--panel);border:1px solid var(--border);border-radius:3px;overflow:hidden;
+.about{
+  display:grid;
+  grid-template-columns:1fr .85fr;       /* image | right stack */
+  grid-template-areas:
+    "image prose"
+    "image code";
+  gap:36px;
+  align-items:start;
 }
+.about-image{grid-area:image;align-self:stretch}
+.about-image img{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block}
+.about-prose{grid-area:prose}
 .about-card::before{
-  content:"● ● ●";display:block;padding:10px 16px;color:var(--text-faint);
+  color:var(--text-faint);
   font-size:11px;letter-spacing:3px;border-bottom:1px solid var(--border);background:var(--bg-soft);
 }
-.about-code{padding:22px;font-size:13.5px;line-height:1.9;overflow-x:auto}
 .c-key{color:var(--accent-2)}.c-var{color:var(--text)}.c-prop{color:var(--warn)}.c-str{color:var(--accent)}
 .about-prose p{margin-bottom:18px;color:var(--text-dim);font-size:15px}
 .about-prose strong{color:var(--text)}
-.about-prose code{color:var(--accent-2);background:var(--bg-soft);padding:1px 6px;border-radius:3px;font-size:13px}
 .about-links{display:flex;gap:20px;margin-top:26px;font-size:14px}
 .about-links a{color:var(--accent);border-bottom:1px solid transparent;transition:border-color .2s}
 .about-links a:hover{border-color:var(--accent)}
