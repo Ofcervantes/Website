@@ -188,7 +188,10 @@ function renderProjects(){
       <div class="project-top"><span class="project-idx">${idx}</span><span class="project-tags">${tags}</span></div>
       <h3 class="project-name">${escapeHtml(p.name)}</h3>
       <p class="project-desc">${escapeHtml(p.desc || "")}</p>
-      <div class="project-links">${links}</div>
+      <div class="project-foot">
+        <div class="project-links">${links}</div>
+        <span class="project-date">${escapeHtml(p.date || "")}</span>
+      </div>
     </article>`;
   }).join("");
 }
