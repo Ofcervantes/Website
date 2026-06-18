@@ -136,7 +136,7 @@ code{font-family:var(--mono)}
 .section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border-hi),transparent)}
 
 /* ============ PROJECTS ============ */
-.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:18px}
+.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .project{
   background:var(--panel);border:1px solid var(--border);border-radius:3px;
   padding:24px;transition:all .25s;position:relative;overflow:hidden;
@@ -161,9 +161,9 @@ code{font-family:var(--mono)}
   display:grid;
   grid-template-columns:1fr .85fr;       /* image | right stack */
   grid-template-areas:
-    "image prose"
-    "image code";
-  gap:36px;
+    "image code"
+    "image prose";
+  gap:60px;
   align-items:start;
 }
 .about-image{grid-area:image;align-self:stretch}
@@ -184,13 +184,13 @@ code{font-family:var(--mono)}
 .notes-intro{color:var(--text-dim);max-width:620px;margin-bottom:28px;font-size:14px}
 .notes-intro code{color:var(--accent-2);background:var(--bg-soft);padding:1px 6px;border-radius:3px;font-size:12.5px}
 .notes-toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:24px}
-#notes-search{
+#notes-search,#projects-search{
   flex:1;min-width:200px;background:var(--panel);border:1px solid var(--border);
   color:var(--text);font-family:var(--mono);font-size:13.5px;padding:11px 16px;border-radius:3px;
   transition:border-color .2s;
 }
-#notes-search:focus{outline:none;border-color:var(--accent)}
-#notes-search::placeholder{color:var(--text-faint)}
+#notes-search:focus,#projects-search:focus{outline:none;border-color:var(--accent)}
+#notes-search::placeholder,#projects-search::placeholder{color:var(--text-faint)}
 .notes-filters{display:flex;gap:8px;flex-wrap:wrap}
 .filter-btn{
   background:transparent;border:1px solid var(--border);color:var(--text-dim);
@@ -271,6 +271,7 @@ code{font-family:var(--mono)}
 /* ============ RESPONSIVE ============ */
 @media(max-width:760px){
   .about{grid-template-columns:1fr}
+  .projects{grid-template-columns:1fr}
   .nav-links{gap:14px;font-size:12.5px}
   .hero{min-height:80vh}
 }

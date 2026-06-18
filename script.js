@@ -129,3 +129,69 @@ function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;","
 function escapeAttr(s){return escapeHtml(s).replace(/"/g,"&quot;");}
 
 loadNotes();
+
+/* ============================================================
+   Projects loader — same pattern as notes, but reads a
+   hand-edited projects.json (tags/desc can't be auto-scanned).
+   Search + tag-chips filter the cards.
+   ============================================================ */
+let ALL_PROJECTS = [], projTag = "all";
+const pGrid    = document.getElementById("projects-grid");
+const pSearch  = document.getElementById("projects-search");
+const pFilters = document.getElementById("projects-filters");
+
+async function loadProjects(){
+  try{
+    const res = await fetch("projects.json", {cache:"no-store"});
+    if(!res.ok) throw new Error("no projects.json");
+    ALL_PROJECTS = (await res.json()).projects || [];
+    buildProjFilters();
+    renderProjects();
+  }catch(e){
+    pGrid.innerHTML = `<p class="notes-empty">No projects yet. Add one to <code>projects.json</code>.</p>`;
+  }
+}
+
+/* tag chips, built from every tag that appears */
+function buildProjFilters(){
+  const tags = ["all", ...new Set(ALL_PROJECTS.flatMap(p => p.tags || []))];
+  pFilters.innerHTML = tags.map(t =>
+    `<button class="filter-btn ${t===projTag?"active":""}" data-tag="${escapeAttr(t)}">${escapeHtml(t)}</button>`
+  ).join("");
+  pFilters.querySelectorAll(".filter-btn").forEach(b=>{
+    b.addEventListener("click",()=>{
+      projTag = b.dataset.tag;
+      pFilters.querySelectorAll(".filter-btn").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");
+      renderProjects();
+    });
+  });
+}
+
+function renderProjects(){
+  const q = pSearch.value.trim().toLowerCase();
+  const filtered = ALL_PROJECTS.filter(p=>{
+    const tags = (p.tags || []).map(t => t.toLowerCase());
+    const okTag = projTag === "all" || tags.includes(projTag.toLowerCase());
+    const hay = [p.name, p.desc, ...(p.tags || [])].join(" ").toLowerCase();
+    return okTag && (!q || hay.includes(q));   // search hits tags, name, or desc
+  });
+
+  if(!filtered.length){ pGrid.innerHTML = `<p class="notes-empty">No projects match.</p>`; return; }
+
+  pGrid.innerHTML = filtered.map(p=>{
+    const idx   = String(ALL_PROJECTS.indexOf(p)+1).padStart(2,"0"); // stable number
+    const tags  = (p.tags || []).map(escapeHtml).join('<span class="tag-sep">·</span>');
+    const links = (p.links || []).map(l =>
+      `<a href="${escapeAttr(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.label)}</a>`).join("");
+    return `<article class="project">
+      <div class="project-top"><span class="project-idx">${idx}</span><span class="project-tags">${tags}</span></div>
+      <h3 class="project-name">${escapeHtml(p.name)}</h3>
+      <p class="project-desc">${escapeHtml(p.desc || "")}</p>
+      <div class="project-links">${links}</div>
+    </article>`;
+  }).join("");
+}
+
+pSearch.addEventListener("input", renderProjects);
+loadProjects();
