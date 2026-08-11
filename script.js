@@ -272,11 +272,15 @@
         item.label || [item.code, item.title].filter(Boolean).join(" · ")
       ).trim();
       if (!label) return null;
-      return { label, href: safeHref(item.url) };
+      return {
+        label,
+        href: safeHref(item.url),
+        level: String(item.level || "").trim(),
+      };
     }
 
     const label = String(item || "").trim();
-    return label ? { label, href: "" } : null;
+    return label ? { label, href: "", level: "" } : null;
   }
 
   function renderCoursework(container, groups) {
@@ -301,9 +305,14 @@
           <ul class="coursework-list">
             ${group.items.map((item) => {
               const label = escapeHtml(item.label);
-              return item.href
-                ? `<li><a href="${escapeHtml(item.href)}"${linkAttributes(item.href)}>${label}</a></li>`
-                : `<li>${label}</li>`;
+              const labelMarkup = item.href
+                ? `<a href="${escapeHtml(item.href)}"${linkAttributes(item.href)}>${label}</a>`
+                : label;
+              const isGraduate = item.level.toLowerCase().includes("graduate");
+              const levelMarkup = item.level
+                ? `<span class="course-level${isGraduate ? " course-level--graduate" : ""}">${escapeHtml(item.level)}</span>`
+                : "";
+              return `<li><span class="course-name">${labelMarkup}</span>${levelMarkup}</li>`;
             }).join("")}
           </ul>
         </article>`)
@@ -522,6 +531,16 @@
       : "";
   }
 
+  function renderProjectAttachments(links) {
+    const linksMarkup = renderProjectLinks(links);
+
+    return `
+      <div class="portfolio-case-attachments">
+        <span>Attachments</span>
+        ${linksMarkup || '<p class="portfolio-case-attachments-empty">No public attachments yet.</p>'}
+      </div>`;
+  }
+
   function renderProjects(container, projects) {
     const validProjects = projects.filter((project) => project && typeof project === "object");
 
@@ -547,7 +566,7 @@
 
         return `
           <article class="content-entry project-item">
-            <h2 class="project-title">${escapeHtml(title)}</h2>
+            <h3 class="project-title">${escapeHtml(title)}</h3>
             ${description ? `<p class="project-description">${escapeHtml(description)}</p>` : ""}
             ${metadata.length ? `<div class="entry-meta">${metadata.join("")}</div>` : ""}
             ${renderProjectLinks(project.links)}
@@ -556,12 +575,97 @@
       .join("");
   }
 
+  function renderPortfolioProjectMedia(media) {
+    if (!Array.isArray(media)) return "";
+
+    const validMedia = media
+      .map((item) => {
+        if (!item || typeof item !== "object") return "";
+
+        const src = safeBackgroundUrl(item.src);
+        if (!src) return "";
+
+        const alt = String(item.alt || "Project visual").trim();
+        const caption = String(item.caption || "").trim();
+        return `
+          <figure class="portfolio-case-media">
+            <img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}">
+            ${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ""}
+          </figure>`;
+      })
+      .filter(Boolean);
+
+    return validMedia.length
+      ? `<div class="portfolio-case-media-grid">${validMedia.join("")}</div>`
+      : "";
+  }
+
+  function renderPortfolioProjects(container, projects) {
+    const validProjects = projects.filter((project) => {
+      if (!project || typeof project !== "object") return false;
+      return project.portfolio?.include !== false;
+    });
+
+    if (!validProjects.length) {
+      setMessage(container, "empty", "No projects have been added yet.");
+      return;
+    }
+
+    container.innerHTML = validProjects
+      .map((project, index) => {
+        const title = project.title || project.name || "Untitled project";
+        const overview = project.portfolio?.summary ?? project.description ?? project.desc ?? "";
+        const tags = Array.isArray(project.tags)
+          ? project.tags.filter((tag) => String(tag || "").trim())
+          : [];
+        const detailFields = [
+          ["Purpose", project.portfolio?.objective],
+          ["Engineering challenge", project.portfolio?.challenge],
+          ["My contribution", project.portfolio?.contribution],
+          ["Outcome", project.portfolio?.outcome],
+          ["Reflection & next iteration", project.portfolio?.reflection],
+        ].filter(([, value]) => String(value || "").trim());
+        const detailMarkup = detailFields
+          .map(([label, value]) => `
+            <section class="portfolio-case-detail">
+              <h4>${escapeHtml(label)}</h4>
+              <p>${escapeHtml(value)}</p>
+            </section>`)
+          .join("");
+        const mediaMarkup = renderPortfolioProjectMedia(project.portfolio?.media);
+
+        return `
+          <article class="portfolio-case-study">
+            <header class="portfolio-case-header">
+              <div>
+                <p class="portfolio-case-number">Project ${String(index + 1).padStart(2, "0")}</p>
+                <h3>${escapeHtml(title)}</h3>
+              </div>
+              ${project.date ? `<p class="portfolio-case-date">${escapeHtml(project.date)}</p>` : ""}
+            </header>
+            ${overview ? `<p class="portfolio-case-overview">${escapeHtml(overview)}</p>` : ""}
+            ${mediaMarkup}
+            ${detailMarkup ? `<div class="portfolio-case-details">${detailMarkup}</div>` : ""}
+            ${tags.length ? `<div class="portfolio-case-tools"><span>Tools &amp; methods</span><p>${tags.map(escapeHtml).join(" · ")}</p></div>` : ""}
+            ${renderProjectAttachments(project.links)}
+          </article>`;
+      })
+      .join("");
+  }
+
   async function loadProjects() {
     const container = document.getElementById("projects-list");
-    if (!container) return;
+    const portfolioContainer = document.getElementById("portfolio-projects-list");
+    if (!container && !portfolioContainer) return;
 
-    container.setAttribute("aria-live", "polite");
-    setMessage(container, "loading", "Loading projects…");
+    if (container) {
+      container.setAttribute("aria-live", "polite");
+      setMessage(container, "loading", "Loading projects…");
+    }
+    if (portfolioContainer) {
+      portfolioContainer.setAttribute("aria-live", "polite");
+      setMessage(portfolioContainer, "loading", "Loading projects…");
+    }
 
     try {
       const data = await fetchJson("projects.json");
@@ -571,10 +675,16 @@
         throw new Error("projects.json does not contain a projects array");
       }
 
-      renderProjects(container, projects);
+      if (container) renderProjects(container, projects);
+      if (portfolioContainer) renderPortfolioProjects(portfolioContainer, projects);
     } catch (error) {
       console.error("Could not load projects.json", error);
-      setMessage(container, "error", "Projects could not be loaded. Please check projects.json.");
+      if (container) {
+        setMessage(container, "error", "Projects could not be loaded. Please check projects.json.");
+      }
+      if (portfolioContainer) {
+        setMessage(portfolioContainer, "error", "Projects could not be loaded. Please check projects.json.");
+      }
     }
   }
 
@@ -651,13 +761,33 @@
     }
   }
 
+  function setupPortfolioPrint(loadPromises) {
+    const button = document.getElementById("portfolio-print");
+    if (!button) return;
+
+    const status = document.getElementById("portfolio-print-status");
+
+    Promise.allSettled(loadPromises).then(() => {
+      button.disabled = false;
+      document.body.dataset.portfolioReady = "true";
+      if (status) {
+        status.textContent = "Ready to export.";
+      }
+    });
+
+    button.addEventListener("click", () => {
+      window.print();
+    });
+  }
+
   document.querySelectorAll("[data-current-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());
   });
 
   setupTheme();
   setupMobileNavigation();
-  loadSiteSettings();
-  loadProjects();
-  loadNotes();
+  const siteReady = loadSiteSettings();
+  const projectsReady = loadProjects();
+  const notesReady = loadNotes();
+  setupPortfolioPrint([siteReady, projectsReady, notesReady]);
 })();

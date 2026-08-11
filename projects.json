@@ -2,29 +2,48 @@
   "_editingGuide": {
     "addProject": "Copy one project object inside the projects array, paste it at the top for the newest project, and replace its values.",
     "requiredFields": ["name", "desc"],
-    "optionalFields": ["tags", "links", "date"],
+    "optionalFields": ["tags", "links", "date", "portfolio"],
+    "portfolioFields": ["objective", "challenge", "contribution", "outcome", "reflection", "media"],
     "jsonReminder": "Use double quotes and place commas between project objects. Do not add a comma after the final object."
   },
   "projects": [
     {
       "name": "On-Chip Filters for Hybrid Superconducting–Semiconducting Quantum Systems",
       "desc": "Designed compact on-chip filters using niobium (Nb)-based coplanar waveguides on a silicon substrate to suppress 3–5 GHz microwave-photon leakage from an OCS transmon into nearby gate lines while preserving control signals up to 100 MHz. The design supports transmon-mediated coupling between triple quantum dots for scalable hybrid quantum-computing systems.",
-      "tags": ["HFSS", "AWR Microwave Office", "KLayout", "RF/Microwave Engineering", "Transmission Line Theory"]
+      "tags": ["HFSS", "AWR Microwave Office", "KLayout", "RF/Microwave Engineering", "Transmission Line Theory"],
+      "portfolio": {
+        "objective": "Create compact on-chip filtering that preserves gate-line control signals up to 100 MHz while isolating an OCS transmon operating from 3–5 GHz.",
+        "challenge": "Separate low-frequency control from microwave energy across room-temperature and cryogenic operation while minimizing passband insertion loss at a semiconductor–superconductor interface.",
+        "contribution": "Serve as technical owner for the filter subsystem; automate 3D models and HFSS simulations with PyAEDT, extract parasitics with Q3D, develop circuit models in AWR, and generate fabrication-ready GDS layouts.",
+        "outcome": "Produced compact niobium-on-silicon CPW filter layouts and fabricated devices for continued electromagnetic and cryogenic validation."
+      }
     },
     {
       "name": "Amplifier Module (22nm FinFET CMOS Tapeout)",
       "desc": "Designed and simulated a 22 nm FinFET CMOS chip combining an analog amplifier, activation switches, and digital control logic, then completed the Cadence layout and DRC/LVS verification for tapeout.",
       "tags": ["Cadence Virtuoso", "Semiconductor Circuits"],
       "links": [
-        { "label": "documentation \u2197", "url": "./assets/Amplifier_Module/Amplifier_Module_FinalReport.pdf" }
+        { "label": "Amplifier module presentation (PDF)", "url": "./assets/Amplifier_Module/Amplifier_Module_FinalReport.pdf" }
       ],
-      "date": "Spring 2026"
+      "date": "Spring 2026",
+      "portfolio": {
+        "objective": "Integrate an analog amplifier, activation switches, and digital control logic in a 22 nm FinFET CMOS tapeout.",
+        "challenge": "Coordinate analog performance, transistor-level control, physical-layout constraints, and verification in an advanced-node IC flow.",
+        "contribution": "Designed and simulated the circuit, completed the Cadence physical layout, and resolved Calibre DRC/LVS requirements for tapeout.",
+        "outcome": "Completed a tapeout-ready layout and verified more than 26 dB gain at 1 MHz with a 300 mV peak-to-peak output swing while operating 48% below the 500 µW power limit."
+      }
     },
     {
       "name": "Multi-IC solar charging module",
       "desc": "Completed the system-level design, schematics, and PCB layout for a multi-IC solar-charging module.",
       "tags": ["Cadence OrCAD", "Oscilloscope"],
-      "date": "Summer 2025"
+      "date": "Summer 2025",
+      "portfolio": {
+        "objective": "Develop a multi-IC module that coordinates solar-energy input, charging, and board-level power delivery.",
+        "challenge": "Integrate multiple power-path components and interfaces into a coherent, buildable PCB design.",
+        "contribution": "Translated requirements into system architecture, designed and simulated buck, boost, and buck-boost power stages, completed schematics and PCB layout, and assembled SMD prototypes.",
+        "outcome": "Validated end-to-end circuit functionality with I²C communication, oscilloscopes, and electronic loads, and delivered the system design and board layout."
+      }
     }
   ]
 }

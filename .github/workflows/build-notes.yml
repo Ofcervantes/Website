@@ -34,7 +34,7 @@ jobs:
       - name: Assemble public site
         run: |
           mkdir -p _site
-          cp index.html about.html projects.html notes.html \
+          cp index.html about.html portfolio.html projects.html notes.html \
             style.css script.js site.json projects.json \
             CNAME .nojekyll _site/
           cp -R assets notes _site/

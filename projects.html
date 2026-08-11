@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projects — Oswin Franco Cervantes</title>
-  <meta name="description" content="Selected engineering and physics projects by Oswin Franco Cervantes.">
+  <title>Projects &amp; Portfolio — Oswin Franco Cervantes</title>
+  <meta name="description" content="Expanded engineering projects and a print-ready portfolio by Oswin Franco Cervantes.">
   <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" href="style.css?v=20260810-7">
+  <link rel="icon" type="image/png" href="assets/af-logo.png">
+  <link rel="stylesheet" href="style.css?v=20260811-6">
   <script>
     document.documentElement.classList.add("js");
     try {
@@ -15,7 +16,7 @@
     } catch (_error) {}
   </script>
 </head>
-<body>
+<body class="portfolio-page projects-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header">
@@ -45,24 +46,100 @@
     </div>
   </header>
 
-  <main id="main-content" class="page-main">
-    <header class="page-hero">
+  <main id="main-content" class="page-main portfolio-main">
+    <section class="portfolio-cover portfolio-print-only" aria-labelledby="portfolio-name">
+      <div class="portfolio-cover-grid">
+        <div class="portfolio-photo-frame">
+          <img class="portfolio-photo" src="assets/oswin-profile.png" alt="Portrait of Oswin Franco Cervantes" data-site-src="profile.photo" data-site-alt="profile.photoAlt">
+        </div>
+
+        <div class="portfolio-introduction">
+          <p class="section-kicker">Engineering Project Portfolio</p>
+          <h1 id="portfolio-name" data-site-text="profile.fullName">Oswin Franco Cervantes</h1>
+          <p class="portfolio-role" data-site-text="profile.role">Physics + Electrical Engineering with Computing @ MIT</p>
+          <p class="portfolio-statement" data-site-text="profile.statement">Exploring quantum systems, integrated circuits, applied electromagnetics, and computation through research and engineering.</p>
+
+          <ul class="portfolio-contact-list" aria-label="Portfolio contact links">
+            <li><a href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a></li>
+            <li><a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a></li>
+            <li><a href="assets/Oswin_Cervantes_Resume.pdf" target="_blank" rel="noopener noreferrer" data-site-href="contact.resume">Resume</a></li>
+            <li><a href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github">GitHub</a></li>
+            <li><a href="https://www.youtube.com/@Oswin_Cervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.youtube">YouTube</a></li>
+            <li><a href="https://oswincervantes.com">Website</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="portfolio-profile-grid">
+        <article class="portfolio-profile-item">
+          <p class="portfolio-profile-label">Education</p>
+          <p data-site-text="profile.education">MIT · Physics + Electrical Engineering with Computing; Georgia Tech · Dual Enrollment in Mathematics and Computer Science (2022 - 2024)</p>
+        </article>
+        <article class="portfolio-profile-item">
+          <p class="portfolio-profile-label">Based in</p>
+          <p data-site-text="profile.location">Cambridge, Massachusetts</p>
+        </article>
+      </div>
+
+      <section class="portfolio-cover-summary" aria-labelledby="portfolio-experience-heading">
+        <div class="section-heading">
+          <p class="section-kicker">Experience</p>
+          <h2 id="portfolio-experience-heading">Roles &amp; research</h2>
+        </div>
+        <div class="experience-list" id="experience-list">
+          <p class="status-message">Loading experience…</p>
+        </div>
+      </section>
+
+      <section class="portfolio-cover-summary portfolio-cover-skills" aria-labelledby="portfolio-skills-heading">
+        <div class="section-heading">
+          <p class="section-kicker">Technical toolkit</p>
+          <h2 id="portfolio-skills-heading">Skills &amp; Expertise</h2>
+        </div>
+        <div class="skills-grid" id="skills-list">
+          <p class="status-message">Loading skills…</p>
+        </div>
+      </section>
+    </section>
+
+    <header class="page-hero projects-screen-hero projects-screen-only" id="portfolio">
       <p class="section-kicker">Projects</p>
       <h1>Selected work.</h1>
-      <p>Projects across integrated circuits, electronics, and system design. This page is continually under development as new work is added.</p>
+      <p class="projects-portfolio-summary">Projects across integrated circuits, electronics, and system design. This page is continually under development as new work is added.</p>
+
+      <aside class="portfolio-toolbar portfolio-toolbar--quiet" aria-label="Portfolio PDF export">
+        <p><span class="portfolio-toolbar-label">Portfolio PDF</span> <span id="portfolio-print-status">Preparing…</span></p>
+        <button class="portfolio-print-button portfolio-print-button--quiet" id="portfolio-print" type="button" disabled>
+          Save PDF
+        </button>
+      </aside>
     </header>
 
-    <section class="page-section" aria-labelledby="projects-heading">
+    <section class="page-section portfolio-section portfolio-projects-section" aria-labelledby="portfolio-projects-heading">
       <div class="section-heading section-heading--row">
-        <h2 id="projects-heading">Projects</h2>
-        <p>Most recent first</p>
+        <div>
+          <p class="section-kicker">Selected work</p>
+          <h2 id="portfolio-projects-heading">Projects</h2>
+        </div>
+        <p>Purpose · challenge · contribution · outcome</p>
       </div>
 
-      <div id="projects-list" class="content-list" aria-live="polite">
+      <div id="portfolio-projects-list" class="portfolio-case-list" aria-live="polite">
         <p class="status-message">Loading projects…</p>
       </div>
-      <noscript><p class="status-message">JavaScript is required to load the project list.</p></noscript>
     </section>
+
+    <section class="page-section portfolio-section coursework-section portfolio-print-only" aria-labelledby="portfolio-coursework-heading">
+      <div class="section-heading">
+        <p class="section-kicker">Academic foundation</p>
+        <h2 id="portfolio-coursework-heading">Selected Coursework</h2>
+      </div>
+      <div class="coursework-grid" id="coursework-list">
+        <p class="status-message">Loading coursework…</p>
+      </div>
+    </section>
+
+    <noscript><p class="status-message">JavaScript is required to assemble the expanded projects and PDF portfolio.</p></noscript>
   </main>
 
   <footer class="site-footer">
@@ -71,12 +148,13 @@
       <div class="footer-links">
         <a href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
         <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
+        <a href="assets/Oswin_Cervantes_Resume.pdf" target="_blank" rel="noopener noreferrer" data-site-href="contact.resume">Resume</a>
         <a href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github">GitHub</a>
         <a href="https://www.youtube.com/@Oswin_Cervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.youtube">YouTube</a>
       </div>
     </div>
   </footer>
 
-  <script src="script.js?v=20260810-7"></script>
+  <script src="script.js?v=20260811-6"></script>
 </body>
 </html>

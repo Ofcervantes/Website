@@ -12,6 +12,7 @@
   "contact": {
     "email": "mailto:cervanteso@acm.org",
     "linkedin": "https://www.linkedin.com/in/ocerv/",
+    "resume": "assets/Oswin_Cervantes_Resume.pdf",
     "github": "https://github.com/Ofcervantes",
     "youtube": "https://www.youtube.com/@Oswin_Cervantes"
   },
@@ -57,8 +58,16 @@
         "6.2080 · Semiconductor Electronic Circuits",
         "6.3000 · Signal Processing",
         "6.2090 · Solid-State Circuits",
-        "6.6020 · High-Frequency Integrated Circuits (Graduate-level)",
-        "6.6300 · Electromagnetics (Graduate-level)"
+        {
+          "code": "6.6020",
+          "title": "High-Frequency Integrated Circuits",
+          "level": "Graduate level"
+        },
+        {
+          "code": "6.6300",
+          "title": "Electromagnetics",
+          "level": "Graduate level"
+        }
       ]
     }
   ],

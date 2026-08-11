@@ -16,9 +16,12 @@ The remaining files control page-specific writing and the visual design:
 
 - `index.html` is the home page. Edit its introduction and section descriptions directly.
 - `about.html` is the longer about page. Edit its biography paragraphs directly; its structured sections come from `site.json`.
+- `projects.html` shows expanded project sections and includes the button that assembles the print-ready PDF portfolio from `site.json` and `projects.json`.
+- `portfolio.html` only redirects older portfolio links to the Projects page; normal edits do not belong there.
 - `style.css` controls the appearance shared by every page.
 - `assets/af-logo.png` is the shared header logo.
 - `assets/oswin-profile.png` is the home-page portrait.
+- `assets/Oswin_Cervantes_Resume.pdf` is the resume opened by the CV link beside LinkedIn.
 
 ## Quick content updates
 
@@ -64,7 +67,9 @@ Add, remove, or reorder objects in the array without changing the JavaScript. If
 
 ### Update profile or contact details
 
-Open `site.json` to change the name, large home-page role and statement, education, focus summary, location, photo, email, LinkedIn URL, GitHub URL, or YouTube URL in one place. Keep the quotation marks and commas valid JSON. The email value should start with `mailto:`.
+Open `site.json` to change the name, large home-page role and statement, education, focus summary, location, photo, email, LinkedIn URL, resume path, GitHub URL, or YouTube URL in one place. Keep the quotation marks and commas valid JSON. The email value should start with `mailto:`.
+
+To publish a newer resume later, replace `assets/Oswin_Cervantes_Resume.pdf` with the updated PDF while keeping the same filename. No HTML changes are needed.
 
 To change the logo, replace `assets/af-logo.png` with another transparent PNG using the same filename. To change the portrait, add the new image in `assets/` and update `profile.photo` in `site.json`.
 
@@ -92,7 +97,8 @@ The About page reads these structured sections from `site.json`, so normal conte
       {
         "code": "8.20",
         "title": "Linked class",
-        "url": "https://example.com/"
+        "url": "https://example.com/",
+        "level": "Graduate level"
       }
     ]
   }
@@ -126,7 +132,18 @@ The About page reads these structured sections from `site.json`, so normal conte
 ]
 ```
 
-Coursework items may be simple text or a `code`/`title`/`url` object when you want a linked class. `organizationUrl` is optional. Keep the quotation marks and commas valid JSON. The HTML contains matching fallback content so the page remains readable if JavaScript is unavailable.
+Coursework items may be simple text or a structured object. The `url` and `level` fields are optional; a level containing “Graduate” appears as a dark-green badge. `organizationUrl` is also optional. Keep the quotation marks and commas valid JSON. The HTML contains matching fallback content so the page remains readable if JavaScript is unavailable.
+
+### Create the PDF portfolio
+
+Open `projects.html` through the local preview or published website. The normal page shows the expanded projects, while its Portfolio PDF button adds the print cover, experience, skills, and coursework from `site.json` and `projects.json`.
+
+1. Wait until the PDF panel says the content is ready.
+2. Choose **Save PDF**.
+3. Select **Save as PDF** in the browser print dialog.
+4. Turn off the browser’s own headers and footers for the cleanest result.
+
+The screen page and printed PDF have separate layouts, so you should not duplicate portfolio content in the HTML. Update the JSON files instead and both versions will stay synchronized automatically.
 
 ### Navigation and color theme
 
@@ -165,11 +182,27 @@ Open `projects.json`. Each project is an object inside the `projects` list:
       "url": "https://example.com"
     }
   ],
-  "date": "Spring 2026"
+  "date": "Spring 2026",
+  "portfolio": {
+    "objective": "What the project was meant to accomplish.",
+    "challenge": "Why the engineering problem was difficult.",
+    "contribution": "What you personally designed, analyzed, built, or led.",
+    "outcome": "What worked, measured results, and the delivered result.",
+    "reflection": "Optional lessons or what you would change next time.",
+    "media": [
+      {
+        "src": "assets/projects/example-result.png",
+        "alt": "Accessible description of the project image",
+        "caption": "Optional technical caption"
+      }
+    ]
+  }
 }
 ```
 
-Keep the commas and quotation marks valid JSON. A project may omit `tags`, `links`, or `date` if they are not needed. Links may also point to files in this repository, such as `assets/report.pdf`.
+Keep the commas and quotation marks valid JSON. A project may omit `tags`, `links`, `date`, any portfolio field, or `media` when they are not needed. Links may also point to files in this repository, such as `assets/report.pdf`.
+
+The Projects view uses `name`, `desc`, `tags`, `links`, and `date`, then expands the nested `portfolio` fields into each project section. The Portfolio PDF uses the same project sections in a print-ready layout. Keep the writing specific: explain the project’s purpose, the hard engineering constraint, your individual contribution, and a measurable or concrete outcome. Each project includes an Attachments area: add report, presentation, or other file links to its `links` array. Put project photographs, plots, schematics, or rendered layouts under `assets/projects/` and list them in `media`; both the page and PDF portfolio will include them automatically.
 
 ### Add a note
 
