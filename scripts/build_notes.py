@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
-"""
-Scans the /notes folder for .pdf and .md files and writes notes/manifest.json.
-Runs automatically via GitHub Actions on every push (see .github/workflows/build-notes.yml).
-You never edit this — just drop files in /notes and push.
+"""Rebuild the public note list after manually adding note files.
+
+Preferred workflow: run ``python3 scripts/notes_admin.py`` and use the private
+browser editor. It creates the Markdown file and runs this script for you.
+
+Manual workflow:
+1. Add a .md, .markdown, or .pdf file to notes/.
+2. Run: python3 scripts/build_notes.py
+3. Review notes.html, then commit and push the note and manifest.
+
+Never edit notes/manifest.json by hand. GitHub Actions also runs this script
+before every deployment.
 """
 import json, os, datetime, re
 

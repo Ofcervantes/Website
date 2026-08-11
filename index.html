@@ -1,144 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>~/ portfolio</title>
-<meta name="description" content="Projects, notes, and writing.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oswin Franco Cervantes</title>
+  <meta name="description" content="The personal site of Oswin Franco Cervantes: physics, electrical engineering, projects, and notes.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="style.css?v=20260810-7">
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      const savedTheme = localStorage.getItem("oswin-theme");
+      if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+    } catch (_error) {}
+  </script>
 </head>
 <body>
-<div class="grain"></div>
-<div class="scanline"></div>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-<!-- ============ NAV ============ -->
-<header class="nav">
-  <a href="#top" class="brand">
-    <span class="brand-prompt">$</span> <span class="brand-name" data-text="oswin">oswin</span><span class="cursor">_</span>
-  </a>
-  <nav class="nav-links">
-    <a href="#projects">/projects</a>
-    <a href="#about">/about</a>
-    <a href="#content">/notes</a>
-  </nav>
-</header>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Oswin Cervantes home">
+        <img class="brand-logo" src="assets/af-logo.png" alt="" aria-hidden="true">
+        <span class="brand-copyright" aria-hidden="true">©</span>
+      </a>
 
-<main id="top">
+      <div class="header-actions">
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+          <span>Menu</span>
+        </button>
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <p class="hero-kicker">// Designing &amp; Documenting</p>
-    <h1 class="hero-title">
-      <span class="line">Oswin Franco Cervantes</span>
-      <span class="line accent">physics & engineering </span>
-    </h1>
-    <p class="hero-sub">
-      A living workspace
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">view projects →</a>
-      <a href="#content" class="btn btn-ghost">read notes</a>
-    </div>
-  </div>
-  <div class="hero-meta">
-    <span class="blink">●</span> status: online
-    <span class="sep">·</span> last build: <span id="build-time">—</span>
-  </div>
-</section>
+        <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
+          <a href="index.html" aria-current="page">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="notes.html">Notes</a>
+        </nav>
 
-<!-- ============ ABOUT ============ -->
-<section id="about" class="section">
-  <div class="section-head">
-    <h2 class="section-title">About</h2>
-    <span class="section-line"></span>
-  </div>
-
-    <div class="about">
-    <pre class="about-code"><span class="c-prop">name</span>:      <span class="c-str">"Oswin Franco Cervantes"</span>,
-<span class="c-prop">major</span>:     <span class="c-str">"Physics + EE w/ Computing @ MIT"</span>,
-<span class="c-prop">interests</span>: [<span class="c-str">"photonics"</span>, <span class="c-str">"signals"</span>, <span class="c-str">"electromagnetics"</span>],
-<span class="c-prop">based</span>:     <span class="c-str">"Cambridge, MA"</span>,</pre>
-    <div class="about-card">
-    </div>
-
-
-
-    <div class="about-image">
-    <img src="./assets/Oswin.jpg" alt="Oswin Franco Cervantes" />
-    </div>
-    
-    <div class="about-prose">
-      <p>Hi — I'm <strong>Oswin Franco Cervantes</strong>, an undergraduate at MIT studying Physics and Electrical Engineering with Computing. I'm drawn to systems, signals, and electromagnetics — the places where hardware and computation meet.</p>
-      <p>I like working across the whole system, from circuit design to simulation to low-level programming, and I'm always trying to learn something new. This site is where I keep a growing collection of notes.</p>
-      <div class="about-links">
-        <a href="https://github.com/Ofcervantes" target="_blank" rel="noopener">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a href="mailto:cervanteso@acm.org">Email ↗</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch color theme">
+          <span data-theme-icon aria-hidden="true">◐</span>
+          <span class="visually-hidden" data-theme-label>Dark mode</span>
+        </button>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ============ PROJECTS ============ -->
-<section id="projects" class="section">
-  <div class="section-head">
-    <h2 class="section-title">Projects</h2>
-    <span class="section-line"></span>
-  </div>
+  <main id="main-content" class="home-main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-layout">
+        <img class="hero-photo" src="assets/oswin-profile.png" alt="Portrait of Oswin Franco Cervantes" data-site-src="profile.photo" data-site-alt="profile.photoAlt">
 
-  <div class="notes-toolbar">
-    <input type="search" id="projects-search" placeholder="search projects by tag…" autocomplete="off">
-    <div class="notes-filters" id="projects-filters"></div>
-  </div>
+        <div class="hero-copy">
+          <h1 id="hero-title" data-site-text="profile.fullName">Oswin Franco Cervantes</h1>
+          <p class="hero-role" data-site-text="profile.role">Physics + Electrical Engineering with Computing @ MIT</p>
+          <p class="hero-statement" data-site-text="profile.statement">Building and studying systems across photonics, signals, circuits, and computation. A living workspace for projects and notes.</p>
 
-  <div class="projects" id="projects-grid">
-    <p class="notes-loading">loading projects…</p>
-  </div>
-</section>
+          <div class="social-links" aria-label="Contact links">
+            <a class="social-link" href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin" aria-label="LinkedIn" title="LinkedIn">
+              <span aria-hidden="true">in</span>
+            </a>
+            <a class="social-link" href="mailto:cervanteso@acm.org" data-site-href="contact.email" aria-label="Email" title="Email">
+              <span aria-hidden="true">@</span>
+            </a>
+            <a class="social-link social-link--wide" href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github" aria-label="GitHub" title="GitHub">
+              <span aria-hidden="true">GH</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- ============ CONTENT / NOTES ============ -->
-<section id="content" class="section">
-  <div class="section-head">
-    <h2 class="section-title">Notes</h2>
-    <span class="section-line"></span>
-  </div>
+    <section class="home-overview" aria-labelledby="explore-title">
+      <div class="section-heading">
+        <p class="section-kicker">Explore</p>
+        <h2 id="explore-title">Work, background, and notes.</h2>
+      </div>
 
-  <p class="notes-intro">
-    A living archive.
-  </p>
+      <div class="overview-grid">
+        <a class="overview-card" href="about.html">
+          <span class="overview-number">01</span>
+          <h3>About</h3>
+          <p>What I study, the systems I care about, and how I like to work.</p>
+          <span class="card-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="overview-card" href="projects.html">
+          <span class="overview-number">02</span>
+          <h3>Projects</h3>
+          <p>Selected work in integrated circuits, electronics, and hardware.</p>
+          <span class="card-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="overview-card" href="notes.html">
+          <span class="overview-number">03</span>
+          <h3>Notes</h3>
+          <p>A growing archive of reports, technical notes, and working documents.</p>
+          <span class="card-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
 
-  <div class="notes-toolbar">
-    <input type="search" id="notes-search" placeholder="search notes…" autocomplete="off">
-    <div class="notes-filters" id="notes-filters"></div>
-  </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
+        <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
+        <a href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github">GitHub</a>
+      </div>
+    </div>
+  </footer>
 
-  <div class="notes-list" id="notes-list">
-    <p class="notes-loading">loading notes…</p>
-  </div>
-</section>
-
-</main>
-
-<!-- ============ MARKDOWN VIEWER ============ -->
-<div class="viewer" id="viewer" aria-hidden="true">
-  <div class="viewer-bar">
-    <span class="viewer-title" id="viewer-title"></span>
-    <button class="viewer-close" id="viewer-close">esc ✕</button>
-  </div>
-  <div class="viewer-body" id="viewer-body"></div>
-</div>
-
-<footer class="footer">
-  <span>© <span id="year"></span> Oswin Franco Cervantes</span>
-  <span>built &amp; hosted on GitHub</span>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-<script src="script.js"></script>
+  <script src="script.js?v=20260810-7"></script>
 </body>
 </html>

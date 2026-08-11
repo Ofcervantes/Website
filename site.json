@@ -1,0 +1,232 @@
+{
+  "profile": {
+    "fullName": "Oswin Franco Cervantes",
+    "role": "Physics + Electrical Engineering with Computing @ MIT",
+    "statement": "Building and studying systems across photonics, signals, circuits, and computation. A living workspace for projects and notes.",
+    "education": "MIT · Physics + Electrical Engineering with Computing; Georgia Tech · Dual Enrollment in Mathematics and Computer Science (2022 - 2024)",
+    "focusSummary": "Quantum physics, photonics, signals, and applied electromagnetics; analog and mixed-signal circuits, mmWave and THz; computation and mathematics",
+    "location": "Cambridge, Massachusetts",
+    "photo": "assets/oswin-profile.png",
+    "photoAlt": "Portrait of Oswin Franco Cervantes"
+  },
+  "contact": {
+    "email": "mailto:cervanteso@acm.org",
+    "linkedin": "https://www.linkedin.com/in/ocerv/",
+    "github": "https://github.com/Ofcervantes"
+  },
+  "coursework": [
+    {
+      "group": "Computer Science & Computation",
+      "items": [
+        "6.100A · Introduction to CS Programming in Python",
+        "6.1200 · Mathematics for Computer Science",
+        "6.1010 · Fundamentals of Programming",
+        "6.1903 · Introduction to Programming in C & Assembly",
+        "6.1910 · Computation Structures"
+      ]
+    },
+    {
+      "group": "Mathematics",
+      "items": [
+        "18.01 · Calculus I",
+        "18.02 · Multivariable Calculus",
+        "18.C06 · Linear Algebra and Optimization",
+        "18.03 · Differential Equations",
+        "MATH 3012 · Applied Combinatorics"
+      ]
+    },
+    {
+      "group": "Physics",
+      "items": [
+        "8.012 · Physics I",
+        "8.022 · Physics II",
+        "8.03 · Physics III",
+        "8.20 · Introduction to Special Relativity",
+        "8.223 · Classical Mechanics II",
+        "8.04 · Quantum Physics I",
+        "8.044 · Statistical Physics"
+      ]
+    },
+    {
+      "group": "Electrical Engineering",
+      "items": [
+        "6.2030 · Electronics First Laboratory",
+        "6.2050 · Digital Systems Laboratory",
+        "6.2000 · Electrical Circuits: Modeling and Design of Physical Systems",
+        "6.2080 · Semiconductor Electronic Circuits",
+        "6.3000 · Signal Processing",
+        "6.2090 · Solid-State Circuits",
+        "6.6020 · High-Frequency Integrated Circuits (Graduate-level)",
+        "6.6300 · Electromagnetics (Graduate-level)"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Undergraduate Researcher",
+      "organization": "MIT Research Laboratory of Electronics · Engineering Quantum Systems (EQuS) Group",
+      "organizationUrl": "https://equs.mit.edu/undergraduate-students/",
+      "dates": "Sept. 2025 - Present",
+      "location": "Cambridge, Massachusetts",
+      "summary": "Supports quantum-hardware research through electromagnetic modeling, design automation, and laboratory fabrication."
+    },
+    {
+      "role": "Avionics Engineer",
+      "organization": "MIT Rocket Team",
+      "dates": "Jan. 2026 - Present",
+      "location": "Cambridge, Massachusetts",
+      "summary": "Designs and evaluates RF circuits and PCB interconnects using simulation and vector network analyzer measurements."
+    },
+    {
+      "role": "Hardware Development Engineer (Systems Engineering) Intern",
+      "organization": "Amazon Lab126",
+      "dates": "May 2025 - Aug. 2025",
+      "location": "Sunnyvale, California",
+      "summary": "Contributed to systems engineering, schematic design, PCB layout, and hardware validation for power-electronics systems."
+    }
+  ],
+  "skills": [
+    {
+      "group": "Design and Analysis",
+      "sections": [
+        {
+          "name": "RF & Electromagnetics",
+          "items": [
+            "Electromagnetic modeling",
+            "RF/microwave circuits",
+            "S-parameters",
+            "Transmission lines",
+            "Impedance matching"
+          ]
+        },
+        {
+          "name": "Circuits & Systems",
+          "items": [
+            "Analog/mixed-signal ICs",
+            "Power circuits",
+            "SPICE",
+            "PCB/system design"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Fabrication and Test",
+      "sections": [
+        {
+          "name": "IC Layout & Fabrication",
+          "items": [
+            "Custom IC layout",
+            "DRC/LVS",
+            "GDS/KLayout",
+            "Photolithography",
+            "Cleanroom processing"
+          ]
+        },
+        {
+          "name": "Assembly & Measurement",
+          "items": [
+            "SMD assembly",
+            "VNA measurements",
+            "Oscilloscope measurements"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Software and HDL",
+      "sections": [
+        {
+          "name": "Languages",
+          "items": [
+            "Python",
+            "C",
+            "Java",
+            "Julia",
+            "MATLAB",
+            "Bash"
+          ]
+        },
+        {
+          "name": "HDL & Assembly",
+          "items": [
+            "VHDL",
+            "Bluespec HDL",
+            "RISC-V assembly"
+          ]
+        },
+        {
+          "name": "Libraries & Workflow",
+          "items": [
+            "NumPy",
+            "pandas",
+            "gdstk",
+            "Git"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "EDA Tools",
+      "sections": [
+        {
+          "name": "Ansys",
+          "items": [
+            "HFSS",
+            "Maxwell",
+            "Q3D",
+            "SIwave",
+            "PyAEDT"
+          ]
+        },
+        {
+          "name": "Cadence",
+          "items": [
+            "Cadence Virtuoso",
+            "AWR Microwave Office",
+            "Allegro"
+          ]
+        },
+        {
+          "name": "Layout & PCB",
+          "items": [
+            "Calibre",
+            "Altium",
+            "OrCAD",
+            "KLayout"
+          ]
+        }
+      ]
+    }
+  ],
+  "focusAreas": [
+    {
+      "title": "Quantum Physics, Photonics, Signals & Applied Electromagnetics",
+      "description": "Exploring quantum systems, light-matter interactions, photonic devices, and how signals and energy move through practical systems."
+    },
+    {
+      "title": "Analog & Mixed-Signal Circuits, mmWave & THz",
+      "description": "Designing and analyzing circuits and high-frequency systems across analog, mixed-signal, millimeter-wave, and terahertz regimes."
+    },
+    {
+      "title": "Computation and Math",
+      "description": "Exploring algorithms, combinatorics, machine learning, and numerical methods."
+    }
+  ],
+  "backgrounds": [
+    {
+      "src": "assets/backgrounds/friedrich-the-lonely-tree.webp",
+      "mobileSrc": "assets/backgrounds/friedrich-the-lonely-tree-portrait.webp",
+      "title": "The Lonely Tree — Caspar David Friedrich",
+      "position": "62% 58%",
+      "mobilePosition": "64% 55%"
+    },
+    {
+      "src": "assets/backgrounds/friedrich-evening.webp",
+      "mobileSrc": "assets/backgrounds/friedrich-evening-portrait.webp",
+      "title": "Evening — Caspar David Friedrich",
+      "position": "50% 48%",
+      "mobilePosition": "50% 50%"
+    }
+  ]
+}

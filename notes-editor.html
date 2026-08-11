@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Local Notes Admin — Oswin Franco Cervantes</title>
+  <meta name="description" content="A local-only admin tool for creating Markdown notes.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="style.css?v=20260810-7">
+  <link rel="stylesheet" href="notes-editor.css?v=20260810-1">
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      const savedTheme = localStorage.getItem("oswin-theme");
+      if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+    } catch (_error) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Oswin Cervantes home">
+        <img class="brand-logo" src="assets/af-logo.png" alt="" aria-hidden="true">
+        <span class="brand-copyright" aria-hidden="true">©</span>
+      </a>
+
+      <div class="header-actions">
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+          <span>Menu</span>
+        </button>
+
+        <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html">Projects</a>
+          <a href="notes.html" aria-current="location">Notes</a>
+        </nav>
+
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch color theme">
+          <span data-theme-icon aria-hidden="true">◐</span>
+          <span class="visually-hidden" data-theme-label>Dark mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="page-main editor-main">
+    <header class="page-hero editor-hero">
+      <p class="section-kicker">Local notes admin</p>
+      <h1>Create and save a Markdown note.</h1>
+      <p>This private tool runs on your computer and writes directly to the <code>notes/</code> folder. It is excluded from the published website.</p>
+    </header>
+
+    <section class="page-section editor-section" aria-labelledby="editor-heading">
+      <div class="section-heading editor-heading">
+        <h2 id="editor-heading">Write your note</h2>
+        <p>Enter a title and your Markdown, then save the finished file through the local backend.</p>
+      </div>
+
+      <form id="notes-editor-form" class="editor-grid">
+        <div class="editor-panel editor-fields">
+          <div class="editor-field">
+            <label for="note-title">Title</label>
+            <input id="note-title" name="title" type="text" maxlength="120" autocomplete="off" required aria-describedby="filename-help">
+            <p class="field-hint" id="filename-help">Filename: <output id="filename-output" for="note-title">untitled-note.md</output></p>
+          </div>
+
+          <div class="editor-field editor-field--compact">
+            <label for="note-date">Date <span>(optional)</span></label>
+            <input id="note-date" name="date" type="date">
+          </div>
+
+          <div class="editor-field">
+            <label for="note-body">Markdown</label>
+            <textarea id="note-body" name="body" rows="18" spellcheck="true" placeholder="Write your note here…" aria-describedby="markdown-help"></textarea>
+            <p class="field-hint" id="markdown-help">The preview shows the exact file as safe text. Raw HTML is never executed.</p>
+          </div>
+
+          <div class="editor-actions">
+            <button class="editor-button editor-button--primary" type="submit">Save note</button>
+            <button class="editor-button" id="copy-markdown" type="button">Copy Markdown</button>
+            <button class="editor-button editor-button--quiet" id="clear-note" type="button">Clear</button>
+          </div>
+
+          <p class="keyboard-hint">Keyboard shortcut: <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>S</kbd> saves the note.</p>
+          <p class="editor-status" id="editor-status" role="status" aria-live="polite" aria-atomic="true">Waiting for the local notes backend.</p>
+        </div>
+
+        <section class="editor-panel preview-panel" aria-labelledby="preview-heading">
+          <div class="preview-heading-row">
+            <h2 id="preview-heading">Safe preview</h2>
+            <span>Plain text</span>
+          </div>
+          <pre class="note-preview" id="note-preview" tabindex="0" aria-label="Generated Markdown preview"># Untitled note</pre>
+        </section>
+      </form>
+    </section>
+
+    <section class="page-section editor-workflow" aria-labelledby="publish-heading">
+      <div class="section-heading">
+        <p class="section-kicker">After saving</p>
+        <h2 id="publish-heading">Review and publish through GitHub.</h2>
+      </div>
+      <ol class="editor-steps">
+        <li>The backend writes the Markdown file to <code>notes/</code> and refreshes the local manifest.</li>
+        <li>Review the note on your local Notes page.</li>
+        <li>Commit and push when you are ready; GitHub Pages publishes the updated archive.</li>
+      </ol>
+      <p class="editor-back-link"><a href="notes.html">← Back to notes</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© <span data-current-year>2026</span> Oswin Franco Cervantes. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="notes.html">Notes</a>
+        <a href="mailto:cervanteso@acm.org">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=20260810-7"></script>
+  <script src="notes-editor.js?v=20260810-2"></script>
+</body>
+</html>

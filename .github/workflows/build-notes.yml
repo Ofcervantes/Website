@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -31,10 +31,18 @@ jobs:
       - name: Generate notes manifest
         run: python scripts/build_notes.py
 
+      - name: Assemble public site
+        run: |
+          mkdir -p _site
+          cp index.html about.html projects.html notes.html \
+            style.css script.js site.json projects.json \
+            CNAME .nojekyll _site/
+          cp -R assets notes _site/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deploy

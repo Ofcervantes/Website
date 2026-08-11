@@ -1,8 +1,19 @@
 {
+  "_editingGuide": {
+    "addProject": "Copy one project object inside the projects array, paste it at the top for the newest project, and replace its values.",
+    "requiredFields": ["name", "desc"],
+    "optionalFields": ["tags", "links", "date"],
+    "jsonReminder": "Use double quotes and place commas between project objects. Do not add a comma after the final object."
+  },
   "projects": [
     {
+      "name": "On-Chip Filters for Hybrid Superconducting–Semiconducting Quantum Systems",
+      "desc": "Designed compact on-chip filters using niobium (Nb)-based coplanar waveguides on a silicon substrate to suppress 3–5 GHz microwave-photon leakage from an OCS transmon into nearby gate lines while preserving control signals up to 100 MHz. The design supports transmon-mediated coupling between triple quantum dots for scalable hybrid quantum-computing systems.",
+      "tags": ["HFSS", "AWR Microwave Office", "KLayout", "RF/Microwave Engineering", "Transmission Line Theory"]
+    },
+    {
       "name": "Amplifier Module (22nm FinFET CMOS Tapeout)",
-      "desc": "Design an amplification module to ensure quality amplification, ensure security and consistent activation among other amplification modules, and learn best practices during the layout process for fabrication.",
+      "desc": "Designed and simulated a 22 nm FinFET CMOS chip combining an analog amplifier, activation switches, and digital control logic, then completed the Cadence layout and DRC/LVS verification for tapeout.",
       "tags": ["Cadence Virtuoso", "Semiconductor Circuits"],
       "links": [
         { "label": "documentation \u2197", "url": "./assets/Amplifier_Module/Amplifier_Module_FinalReport.pdf" }
@@ -11,7 +22,7 @@
     },
     {
       "name": "Multi-IC solar charging module",
-      "desc": "Designed system-level design, schematics, and PCB layout for a multi-IC solar charging module compatible with Kindle devices.",
+      "desc": "Completed the system-level design, schematics, and PCB layout for a multi-IC solar-charging module.",
       "tags": ["Cadence OrCAD", "Oscilloscope"],
       "date": "Summer 2025"
     }

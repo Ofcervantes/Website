@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects — Oswin Franco Cervantes</title>
+  <meta name="description" content="Selected engineering and physics projects by Oswin Franco Cervantes.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="style.css?v=20260810-7">
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      const savedTheme = localStorage.getItem("oswin-theme");
+      if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+    } catch (_error) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Oswin Cervantes home">
+        <img class="brand-logo" src="assets/af-logo.png" alt="" aria-hidden="true">
+        <span class="brand-copyright" aria-hidden="true">©</span>
+      </a>
+
+      <div class="header-actions">
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+          <span>Menu</span>
+        </button>
+
+        <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projects.html" aria-current="page">Projects</a>
+          <a href="notes.html">Notes</a>
+        </nav>
+
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch color theme">
+          <span data-theme-icon aria-hidden="true">◐</span>
+          <span class="visually-hidden" data-theme-label>Dark mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="page-main">
+    <header class="page-hero">
+      <p class="section-kicker">Projects</p>
+      <h1>Selected work.</h1>
+      <p>Projects across integrated circuits, electronics, and system design.</p>
+    </header>
+
+    <section class="page-section" aria-labelledby="projects-heading">
+      <div class="section-heading section-heading--row">
+        <h2 id="projects-heading">Projects</h2>
+        <p>Most recent first</p>
+      </div>
+
+      <div id="projects-list" class="content-list" aria-live="polite">
+        <p class="status-message">Loading projects…</p>
+      </div>
+      <noscript><p class="status-message">JavaScript is required to load the project list.</p></noscript>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
+        <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
+        <a href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=20260810-7"></script>
+</body>
+</html>
