@@ -64,7 +64,7 @@ Add, remove, or reorder objects in the array without changing the JavaScript. If
 
 ### Update profile or contact details
 
-Open `site.json` to change the name, large home-page role and statement, education, focus summary, location, photo, email, LinkedIn URL, or GitHub URL in one place. Keep the quotation marks and commas valid JSON. The email value should start with `mailto:`.
+Open `site.json` to change the name, large home-page role and statement, education, focus summary, location, photo, email, LinkedIn URL, GitHub URL, or YouTube URL in one place. Keep the quotation marks and commas valid JSON. The email value should start with `mailto:`.
 
 To change the logo, replace `assets/af-logo.png` with another transparent PNG using the same filename. To change the portrait, add the new image in `assets/` and update `profile.photo` in `site.json`.
 
