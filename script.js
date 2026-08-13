@@ -308,9 +308,16 @@
               const labelMarkup = item.href
                 ? `<a href="${escapeHtml(item.href)}"${linkAttributes(item.href)}>${label}</a>`
                 : label;
-              const isGraduate = item.level.toLowerCase().includes("graduate");
+              const normalizedLevel = item.level.toLowerCase();
+              const isGraduate = normalizedLevel.includes("graduate");
+              const isCoursera = normalizedLevel === "coursera";
+              const levelClass = isGraduate
+                ? " course-level--graduate"
+                : isCoursera
+                  ? " course-level--coursera"
+                  : "";
               const levelMarkup = item.level
-                ? `<span class="course-level${isGraduate ? " course-level--graduate" : ""}">${escapeHtml(item.level)}</span>`
+                ? `<span class="course-level${levelClass}">${escapeHtml(item.level)}</span>`
                 : "";
               return `<li><span class="course-name">${labelMarkup}</span>${levelMarkup}</li>`;
             }).join("")}

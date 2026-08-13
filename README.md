@@ -132,7 +132,7 @@ The About page reads these structured sections from `site.json`, so normal conte
 ]
 ```
 
-Coursework items may be simple text or a structured object. The `url` and `level` fields are optional; a level containing “Graduate” appears as a dark-green badge. `organizationUrl` is also optional. Keep the quotation marks and commas valid JSON. The HTML contains matching fallback content so the page remains readable if JavaScript is unavailable.
+Coursework items may be simple text or a structured object. The `url` and `level` fields are optional; a level containing “Graduate” appears as a dark-green badge, while the level “Coursera” appears as a blue badge. `organizationUrl` is also optional. Keep the quotation marks and commas valid JSON. The HTML contains matching fallback content so the page remains readable if JavaScript is unavailable.
 
 ### Create the PDF portfolio
 

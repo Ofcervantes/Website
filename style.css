@@ -640,10 +640,22 @@ body.has-art-background .overview-card {
   color: #f3faf5;
 }
 
+.course-level--coursera {
+  border-color: #24558e;
+  background: #326cab;
+  color: #f5f9ff;
+}
+
 :root[data-theme="dark"] .course-level--graduate {
   border-color: #4f8a68;
   background: #28583e;
   color: #f4fbf6;
+}
+
+:root[data-theme="dark"] .course-level--coursera {
+  border-color: #679bd3;
+  background: #285d98;
+  color: #f5f9ff;
 }
 
 .coursework-list a {
@@ -1940,6 +1952,13 @@ body.has-art-background .overview-card {
   :root[data-theme="dark"] .portfolio-page .course-level--graduate {
     border-color: #1c4630;
     background: #2a5a40;
+    color: #ffffff;
+  }
+
+  .portfolio-page .course-level--coursera,
+  :root[data-theme="dark"] .portfolio-page .course-level--coursera {
+    border-color: #24558e;
+    background: #326cab;
     color: #ffffff;
   }
 
