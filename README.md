@@ -69,7 +69,7 @@ Add, remove, or reorder objects in the array without changing the JavaScript. If
 
 Open `site.json` to change the name, large home-page role and statement, education, focus summary, location, photo, email, LinkedIn URL, resume path, GitHub URL, or YouTube URL in one place. Keep the quotation marks and commas valid JSON. The email value should start with `mailto:`.
 
-To publish a newer resume later, replace `assets/Oswin_Cervantes_Resume.pdf` with the updated PDF while keeping the same filename. No HTML changes are needed.
+To update the resume, edit `resume/Oswin_Cervantes_Resume.tex` and run `./scripts/build_resume.sh`. The script rebuilds `assets/Oswin_Cervantes_Resume.pdf`, so the existing website links continue to work without HTML changes.
 
 To change the logo, replace `assets/af-logo.png` with another transparent PNG using the same filename. To change the portrait, add the new image in `assets/` and update `profile.photo` in `site.json`.
 
