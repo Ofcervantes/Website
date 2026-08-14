@@ -58,7 +58,7 @@ My goal is to use first-principles physics, electromagnetic modeling, circuit an
   \textbf{Massachusetts Institute of Technology}, Cambridge, MA & \textbf{Expected May 2028} \\
   B.S. Candidate in Physics and Electrical Engineering with Computing & Sept. 2024--Present
 \end{tabularx}
-\textit{Selected coursework:} \textbf{Graduate:} High-Frequency Integrated Circuits, Electromagnetics; \textbf{Coursera:} Microwave Engineering and \mbox{Antennas}, RF and Millimeter-Wave Circuit Design; \textbf{EE/Physics:} Semiconductor Electronic Circuits, Signal Processing, Quantum Physics I, Statistical Mechanics; \textbf{Computer Science:} Mathematics for Computer Science, Computational Structures, Low-Level \mbox{Programming}
+\textit{Selected coursework:} \textbf{Graduate:} High-Frequency Integrated Circuits, Electromagnetics; \textbf{Coursera:} Microwave Engineering and \mbox{Antennas}, RF and Millimeter-Wave Circuit Design; \textbf{EE/Physics:} Solid-State Circuits, Digital Systems Laboratory (Verilog), Semiconductor Electronic Circuits, Signal Processing, Quantum Physics I, Statistical Mechanics; \textbf{Computer Science:} Mathematics for Computer Science, Computational Structures, Low-Level \mbox{Programming}
 
 \vspace{2pt}
 \begin{tabularx}{\textwidth}{@{}Xr@{}}
@@ -76,11 +76,9 @@ My goal is to use first-principles physics, electromagnetic modeling, circuit an
 \section{Experience}
 \role{Undergraduate Researcher --- Prof. William D. Oliver}{Sept. 2025--Present}{MIT Research Laboratory of Electronics, Engineering Quantum Systems (EQuS) Group}{Cambridge, MA}
 \begin{itemize}
-  \item Serve as technical owner for the on-chip microwave-filter subsystem within a cross-functional quantum-hardware team.
-  \item Design filters for operation from room temperature to cryogenic conditions, applying transmission line and impedance matching principles to suppress out-of-band noise while minimizing passband insertion loss at the interface between semiconducting quantum-dot qubits and superconducting circuits.
-  \item Use PyAEDT to automate 3D model generation and HFSS Driven Terminal and Eigenmode simulations for S-parameter and resonant-mode analysis; use Q3D for quasi-static parasitic extraction and AWR Microwave Office for circuit models.
-  \item Maintain the filter component library in CDES, an object-oriented Python framework; use NumPy, pandas, and gdstk to automate generation of fabrication-ready GDS layouts.
-  \item Fabricate superconducting niobium microwave filters on silicon substrates using photolithography in a cleanroom environment.
+  \item Own the design and testing of niobium coplanar-waveguide filters for hybrid semiconductor quantum-dot and superconducting devices, minimizing crosstalk, passband insertion loss, and out-of-band noise from room temperature through cryogenic operation.
+  \item Create RF layouts in KLayout; model electromagnetic fields in Ansys HFSS/Maxwell using eigenmode and S-parameter analyses plus waveguide, transmission-line, and impedance-matching theory; automate with PyAEDT and extract parasitics with Q3D.
+  \item Collaboratively develop CDES, a Python and gdstk framework for superconducting circuit design; contribute reusable components and fabrication GDS layouts through GitHub version control; fabricate niobium devices on silicon by cleanroom photolithography.
 \end{itemize}
 
 \role{Avionics Engineer}{Jan. 2026--Present}{MIT Rocket Team}{Cambridge, MA}
@@ -90,36 +88,36 @@ My goal is to use first-principles physics, electromagnetic modeling, circuit an
 
 \role{Hardware Development Engineer (Systems Engineering) Intern}{May 2025--Aug. 2025}{Amazon Lab126, Advanced Products}{Sunnyvale, CA}
 \begin{itemize}
-  \item Collaborated with a cross-functional team to translate product requirements into system architecture and functional block diagrams, then designed schematics and PCB layout for a multi-IC solar-charging module for Kindle devices.
-  \item Designed and validated buck, boost, and buck-boost power circuits using OrCAD and SPICE for circuit design and simulation and Cadence Allegro for PCB layout; characterized prototypes with oscilloscopes and electronic loads and investigated maximum power point tracking (MPPT).
-  \item Implemented I\textsuperscript{2}C communication and assembled SMD prototypes to verify end-to-end circuit functionality; trained new hires on PCB design tools.
+  \item Translated ambiguous product requirements with a cross-functional team into system architecture, functional block diagrams, schematics, and PCB layout for a multi-IC solar-charging module compatible with Amazon Kindle devices.
+  \item Designed and simulated buck, boost, and buck-boost power circuits in OrCAD Capture and SPICE and laid out PCBs in Cadence Allegro; measured efficiency with oscilloscopes and electronic loads and investigated MPPT.
+  \item Implemented and debugged I\textsuperscript{2}C for IC integration; assembled and tested 0402, 0603, and 0804 SMD prototypes and debug boards to validate end-to-end functionality and performance; trained new hires on PCB tools.
 \end{itemize}
 
 \section{Technical Skills}
 \ifdefstring{\ResumeTrack}{rfic}{%
-\textbf{Design:} RF/microwave circuits, S-parameters, transmission lines, impedance matching, filters/resonators, analog/mixed-signal ICs, SPICE, PCB design\\
+\textbf{Design:} RF/microwave circuits, solid-state circuits, analog/mixed-signal ICs, digital/RTL design, S-parameters, transmission lines, impedance matching, filters/resonators, SPICE, PCB design\\
 \textbf{Layout and Test:} 22 nm FinFET CMOS, custom IC layout, DRC/LVS, SMD assembly, I\textsuperscript{2}C, VNA and oscilloscope measurements\\
-\textbf{Software and HDL:} Python, C, Java, Julia, MATLAB, Bash, VHDL, Bluespec HDL, RISC-V assembly; NumPy, pandas, gdstk, Git\\
+\textbf{Software/HDL:} Python, C, Java, Julia, MATLAB, Bash, Verilog, VHDL, Bluespec, RISC-V asm.; NumPy, pandas, gdstk, Git\\
 \textbf{EDA Tools:} Ansys (HFSS, Maxwell, Q3D, SIwave, PyAEDT); Cadence (custom IC, AWR Microwave Office, Allegro); Calibre, Altium, OrCAD, KLayout%
 }{\ifdefstring{\ResumeTrack}{photonics}{%
-\textbf{Design and Analysis:} Electromagnetic modeling, eigenmode analysis, wave propagation, S-parameters, resonators, signal integrity, analog/RF circuits\\
+\textbf{Design and Analysis:} Electromagnetic modeling, eigenmode analysis, wave propagation, solid-state circuits, digital/RTL design, S-parameters, resonators, signal integrity, analog/RF circuits\\
 \textbf{Layout, Fabrication, and Test:} GDS/KLayout, niobium-on-silicon photolithography, cleanroom processing, custom IC layout, DRC/LVS, VNA and oscilloscope measurements\\
-\textbf{Software and HDL:} Python, C, Java, MATLAB, VHDL; NumPy, pandas, gdstk, Git\\
+\textbf{Software/HDL:} Python, C, Java, MATLAB, Verilog, VHDL; NumPy, pandas, gdstk, Git\\
 \textbf{EDA Tools:} Ansys (HFSS, Maxwell, Q3D, SIwave, PyAEDT); Cadence (custom IC, AWR Microwave Office); Calibre, Altium, OrCAD, KLayout%
 }{\ifdefstring{\ResumeTrack}{quantum}{%
-\textbf{Design and Analysis:} Superconducting circuits, semiconductor quantum dots, microwave filters/resonators, S-parameters, transmission lines, impedance matching, analog/RF circuits\\
+\textbf{Design and Analysis:} Superconducting circuits, semiconductor quantum dots, solid-state circuits, digital/RTL design, microwave filters/resonators, S-parameters, transmission lines, impedance matching, analog/RF circuits\\
 \textbf{Layout, Fabrication, and Test:} GDS/KLayout, niobium-on-silicon photolithography, cleanroom processing, custom IC layout, DRC/LVS, SMD, VNA measurements\\
-\textbf{Software and HDL:} Python, C, Java, Julia, Bash, VHDL, Bluespec HDL, RISC-V assembly; NumPy, pandas, gdstk, Git\\
+\textbf{Software/HDL:} Python, C, Java, Julia, Bash, Verilog, VHDL, Bluespec, RISC-V asm.; NumPy, pandas, gdstk, Git\\
 \textbf{EDA Tools:} Ansys (HFSS, Maxwell, Q3D, SIwave, PyAEDT); Cadence (custom IC, AWR Microwave Office, Allegro); Calibre, Altium, OrCAD, KLayout%
 }{%
-\textbf{Design and Analysis:} Electromagnetic modeling, RF/microwave circuits, analog/mixed-signal ICs, power circuits, S-parameters, transmission lines, impedance matching, SPICE, PCB/system design\\
+\textbf{Design and Analysis:} Electromagnetic modeling, RF/microwave circuits, solid-state circuits, analog/mixed-signal ICs, digital/RTL design, power circuits, S-parameters, transmission lines, impedance matching, SPICE, PCB/system design\\
 \textbf{Fabrication and Test:} 22 nm FinFET custom layout, DRC/LVS, GDS/KLayout, niobium-on-silicon photolithography, cleanroom processing, SMD, VNA and oscilloscope measurements\\
-\textbf{Software and HDL:} Python, C, Java, Julia, MATLAB, Bash, VHDL, Bluespec HDL, RISC-V assembly; NumPy, pandas, gdstk, Git\\
+\textbf{Software/HDL:} Python, C, Java, Julia, MATLAB, Bash, Verilog, VHDL, Bluespec, RISC-V asm.; NumPy, pandas, gdstk, Git\\
 \textbf{EDA Tools:} Ansys (HFSS, Maxwell, Q3D, SIwave, PyAEDT); Cadence (custom IC, AWR Microwave Office, Allegro); Calibre, Altium, OrCAD, KLayout%
 }}}
 
 \section{Honors and Certification}
-\textbf{Honors:} QuestBridge Scholarship; Jack Kent Cooke Foundation Semifinalist; Stanford Intrologic Scholar\\
+\textbf{Honors:} QuestBridge Scholarship; Amazon Scholar; Jack Kent Cooke Foundation Semifinalist; Stanford Intrologic Scholar\\
 \textbf{Certification:} TestOut Network Pro Certification
 
 \end{document}
