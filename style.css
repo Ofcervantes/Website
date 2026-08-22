@@ -23,7 +23,7 @@
   --art-surface: rgba(222, 201, 161, 0.84);
   --art-surface-strong: rgba(222, 201, 161, 0.94);
   --art-line: rgba(77, 55, 29, 0.3);
-  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --sans: "Neue Haas Grotesk Text Pro", "Neue Haas Grotesk Display Pro", "Neue Haas Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 :root[data-theme="dark"] {
