@@ -16,6 +16,9 @@
   --paper-light: rgba(255, 245, 214, 0.23);
   --paper-dark: rgba(80, 55, 27, 0.11);
   --paper-fiber: rgba(69, 47, 23, 0.055);
+  --paper-speck-light: rgba(255, 248, 225, 0.3);
+  --paper-speck-dark: rgba(72, 47, 22, 0.15);
+  --paper-stain: rgba(120, 79, 35, 0.1);
   --art-overlay: rgba(201, 173, 122, 0.4);
   --art-surface: rgba(222, 201, 161, 0.84);
   --art-surface-strong: rgba(222, 201, 161, 0.94);
@@ -41,6 +44,9 @@
   --paper-light: rgba(255, 233, 192, 0.035);
   --paper-dark: rgba(0, 0, 0, 0.16);
   --paper-fiber: rgba(255, 229, 181, 0.025);
+  --paper-speck-light: rgba(255, 230, 184, 0.055);
+  --paper-speck-dark: rgba(0, 0, 0, 0.22);
+  --paper-stain: rgba(0, 0, 0, 0.14);
   --art-overlay: rgba(28, 22, 15, 0.52);
   --art-surface: rgba(65, 52, 36, 0.86);
   --art-surface-strong: rgba(65, 52, 36, 0.94);
@@ -61,8 +67,11 @@ body {
   margin: 0;
   background-color: var(--background);
   background-image:
+    radial-gradient(circle, var(--paper-speck-light) 0 0.6px, transparent 0.85px),
+    radial-gradient(circle, var(--paper-speck-dark) 0 0.48px, transparent 0.82px),
     radial-gradient(ellipse at 14% 9%, var(--paper-light), transparent 36%),
     radial-gradient(ellipse at 82% 72%, var(--paper-dark), transparent 46%),
+    radial-gradient(ellipse at 94% 2%, transparent 38%, var(--paper-stain) 118%),
     repeating-linear-gradient(
       4deg,
       transparent 0,
@@ -71,6 +80,8 @@ body {
       transparent 4.2px,
       transparent 8px
     );
+  background-position: 0 0, 4px 7px, center, center, center, center;
+  background-size: 9px 9px, 13px 13px, 100% 100%, 100% 100%, 100% 100%, auto;
   background-attachment: fixed;
   color: var(--text);
   font-family: var(--sans);

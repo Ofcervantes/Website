@@ -44,11 +44,11 @@ The editor creates the Markdown file and refreshes the note list automatically. 
 
 ### Change the paper background or home-page paintings
 
-The site uses the tan paper background by default. In `site.json`, keep `appearance.artBackgrounds` set to `false` for paper on every page. Change it to `true` to restore the randomized painting behind the home page; About, Projects, and Notes keep the paper background. Each full home-page load then selects one valid entry and avoids immediately repeating the previous painting in the same browser tab.
+The home page uses the randomized paintings by default, while About, Projects, and Notes use the tan paper background. In `site.json`, keep `appearance.artBackgrounds` set to `true` to show the paintings. Change it to `false` if you want the tan paper background on every page. Each full home-page load selects one valid painting and avoids immediately repeating the previous one in the same browser tab.
 
 ```json
 "appearance": {
-  "artBackgrounds": false
+  "artBackgrounds": true
 }
 ```
 
