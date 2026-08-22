@@ -237,6 +237,9 @@
       "description": "Exploring algorithms, combinatorics, machine learning, and numerical methods."
     }
   ],
+  "appearance": {
+    "artBackgrounds": false
+  },
   "backgrounds": [
     {
       "src": "assets/backgrounds/friedrich-the-lonely-tree.webp",

@@ -42,9 +42,17 @@ Only `name` and `desc` are required. `tags`, `links`, and `date` are optional. T
 
 The editor creates the Markdown file and refreshes the note list automatically. You do not need to edit `notes/manifest.json`. For the manual file workflow, see [Add a note](#add-a-note-1) below.
 
-### Change the home-page paintings
+### Change the paper background or home-page paintings
 
-The `backgrounds` array in `site.json` controls the randomized painting behind the home page. About, Projects, and Notes always keep their plain backgrounds. Each full home-page load selects one valid entry and avoids immediately repeating the previous painting in the same browser tab.
+The site uses the tan paper background by default. In `site.json`, keep `appearance.artBackgrounds` set to `false` for paper on every page. Change it to `true` to restore the randomized painting behind the home page; About, Projects, and Notes keep the paper background. Each full home-page load then selects one valid entry and avoids immediately repeating the previous painting in the same browser tab.
+
+```json
+"appearance": {
+  "artBackgrounds": false
+}
+```
+
+The `backgrounds` array in `site.json` stores the available paintings.
 
 Each background has five editable values:
 
@@ -63,7 +71,7 @@ Each background has five editable values:
 - `title` identifies the artwork and is stored on the page as metadata.
 - `position` and `mobilePosition` control the desktop and phone crops used by `background-size: cover`. Use safe keywords such as `left`, `center`, or `right`, or percentages such as `62% 58%`.
 
-Add, remove, or reorder objects in the array without changing the JavaScript. If the array is empty or cannot be loaded, the home page falls back to its normal plain background.
+Add, remove, or reorder objects in the array without changing the JavaScript. If the array is empty or cannot be loaded, the home page falls back to the tan paper background.
 
 ### Update profile or contact details
 

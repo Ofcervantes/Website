@@ -222,7 +222,7 @@
       const resolvedTheme = validThemes.has(theme) ? theme : "light";
       root.dataset.theme = resolvedTheme;
       const themeColor = document.querySelector('meta[name="theme-color"]');
-      if (themeColor) themeColor.setAttribute("content", resolvedTheme === "dark" ? "#111827" : "#ffffff");
+      if (themeColor) themeColor.setAttribute("content", resolvedTheme === "dark" ? "#30271c" : "#c9ad7a");
       updateToggle(resolvedTheme);
       if (persist) saveTheme(resolvedTheme);
     };
@@ -454,7 +454,9 @@
     try {
       const settings = await fetchJson("site.json");
 
-      applyRandomHomeBackground(settings.backgrounds);
+      if (settings.appearance?.artBackgrounds !== false) {
+        applyRandomHomeBackground(settings.backgrounds);
+      }
       renderCoursework(courseworkContainer, settings.coursework);
       renderExperience(experienceContainer, settings.experience);
       renderSkills(skillsContainer, settings.skills);
