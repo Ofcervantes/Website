@@ -11,6 +11,9 @@
       "name": "On-Chip Filters for Hybrid Superconducting–Semiconducting Quantum Systems",
       "desc": "Designed compact on-chip filters using niobium (Nb)-based coplanar waveguides on a silicon substrate to suppress 3–5 GHz microwave-photon leakage from an OCS transmon into nearby gate lines while preserving control signals up to 100 MHz. The design supports transmon-mediated coupling between triple quantum dots for scalable hybrid quantum-computing systems.",
       "tags": ["HFSS", "AWR Microwave Office", "KLayout", "RF/Microwave Engineering", "Transmission Line Theory"],
+      "links": [
+        { "label": "On-chip LC filter design presentation (PDF)", "url": "./assets/LC_Filter/LCFilter_Design_Project.pdf" }
+      ],
       "portfolio": {
         "objective": "Create compact on-chip filtering that preserves gate-line control signals up to 100 MHz while isolating an OCS transmon operating from 3–5 GHz.",
         "challenge": "Separate low-frequency control from microwave energy across room-temperature and cryogenic operation while minimizing passband insertion loss at a semiconductor–superconductor interface.",
@@ -34,9 +37,12 @@
       }
     },
     {
-      "name": "Multi-IC solar charging module",
-      "desc": "Completed the system-level design, schematics, and PCB layout for a multi-IC solar-charging module.",
+      "name": "Volteon — Multi-IC Solar Charging Module",
+      "desc": "Completed the system-level design, schematics, and PCB layout for a multi-IC solar-charging module. This work was completed under NDA, so exact proprietary designs cannot be shown.",
       "tags": ["Cadence OrCAD", "Oscilloscope"],
+      "links": [
+        { "label": "Volteon project presentation (PDF)", "url": "./assets/Volteon/Amazon_Project_Volteon.pdf" }
+      ],
       "date": "Summer 2025",
       "portfolio": {
         "objective": "Develop a multi-IC module that coordinates solar-energy input, charging, and board-level power delivery.",
