@@ -172,10 +172,6 @@
 }
 
 .editor-status[data-kind="error"] {
-  color: #b42318;
-}
-
-:root[data-theme="dark"] .editor-status[data-kind="error"] {
   color: #fda29b;
 }
 

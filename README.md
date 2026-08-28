@@ -153,9 +153,9 @@ Open `projects.html` through the local preview or published website. The normal 
 
 The screen page and printed PDF have separate layouts, so you should not duplicate portfolio content in the HTML. Update the JSON files instead and both versions will stay synchronized automatically.
 
-### Navigation and color theme
+### Navigation and color palette
 
-The responsive menu and theme switch do not need a framework. Their HTML hooks are:
+The responsive menu does not need a framework. Its HTML hooks are:
 
 ```html
 <button id="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false">
@@ -164,16 +164,11 @@ The responsive menu and theme switch do not need a framework. Their HTML hooks a
 <nav id="primary-navigation" aria-label="Primary navigation">
   <!-- page links -->
 </nav>
-
-<button id="theme-toggle" type="button" aria-pressed="false">
-  <span data-theme-icon aria-hidden="true">☾</span>
-  <span data-theme-label>Dark mode</span>
-</button>
 ```
 
 On small screens, CSS should hide `#primary-navigation` by default and show `#primary-navigation.is-open`. While the menu is open, JavaScript also adds `.menu-open` to `<body>`, which CSS may use to prevent background scrolling. The menu closes after a navigation click, an outside click, or Escape; Escape returns focus to the menu button.
 
-The theme switch sets `data-theme="light"` or `data-theme="dark"` on the `<html>` element. CSS theme rules should therefore use selectors such as `:root[data-theme="dark"]`. The first visit follows the device color-scheme preference. A manual choice is saved in local storage under `oswin-theme`. The text and icon marked with `data-theme-label` and `data-theme-icon` automatically update to show the theme the button will switch to.
+The website uses one fixed dark-paper color palette. To adjust it later, edit the color variables in the `:root` block at the top of `style.css`; there is no visitor-facing theme switch or saved mode preference.
 
 ### Add or edit a project
 
