@@ -21,7 +21,6 @@ The remaining files control page-specific writing and the visual design:
 - `style.css` controls the appearance shared by every page.
 - `assets/af-logo.png` is the shared header logo.
 - `assets/oswin-profile.png` is the home-page portrait.
-- `assets/Oswin_Cervantes_Resume.pdf` is the resume opened by the CV link beside LinkedIn.
 
 ## Quick content updates
 
@@ -75,9 +74,9 @@ Add, remove, or reorder objects in the array without changing the JavaScript. If
 
 ### Update profile or contact details
 
-Open `site.json` to change the name, large home-page role and statement, education, focus summary, location, photo, email, LinkedIn URL, resume path, GitHub URL, or YouTube URL in one place. Keep the quotation marks and commas valid JSON. The email value should start with `mailto:`.
+Open `site.json` to change the name, large home-page role and statement, education, focus summary, location, photo, email, LinkedIn URL, GitHub URL, or YouTube URL in one place. Keep the quotation marks and commas valid JSON. The email value should start with `mailto:`.
 
-To update the resume, edit `resume/Oswin_Cervantes_Resume.tex` and run `./scripts/build_resume.sh`. The script rebuilds `assets/Oswin_Cervantes_Resume.pdf`, so the existing website links continue to work without HTML changes.
+The resume is not published on the website. To build a private local copy, edit `resume/Oswin_Cervantes_Resume.tex` and run `./scripts/build_resume.sh`; the PDF is written to `output/pdf/Oswin_Cervantes_Resume.pdf`.
 
 To change the logo, replace `assets/af-logo.png` with another transparent PNG using the same filename. To change the portrait, add the new image in `assets/` and update `profile.photo` in `site.json`.
 
