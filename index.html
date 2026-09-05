@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Oswin Franco Cervantes</title>
   <meta name="description" content="The personal site of Oswin Franco Cervantes: physics, electrical engineering, projects, and notes.">
-  <meta name="theme-color" content="#30271c">
+  <meta name="theme-color" content="#1c211e">
   <link rel="icon" type="image/png" href="assets/af-logo.png">
-  <link rel="stylesheet" href="style.css?v=20260828-2">
+  <link rel="stylesheet" href="style.css?v=20260905-1">
   <script>document.documentElement.classList.add("js");</script>
 </head>
-<body>
+<body class="home-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header">
@@ -20,10 +20,6 @@
       </a>
 
       <div class="header-actions">
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
-          <span>Menu</span>
-        </button>
-
         <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
           <a href="index.html" aria-current="page">Home</a>
           <a href="about.html">About</a>
@@ -37,63 +33,47 @@
   <main id="main-content" class="home-main">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-layout">
-        <img class="hero-photo" src="assets/oswin-profile.png" alt="Portrait of Oswin Franco Cervantes" data-site-src="profile.photo" data-site-alt="profile.photoAlt">
-
+        <img class="hero-photo" src="assets/oswin-profile.png" width="100" height="122" alt="Portrait of Oswin Franco Cervantes" data-site-src="profile.photo" data-site-alt="profile.photoAlt">
         <div class="hero-copy">
           <h1 id="hero-title" data-site-text="profile.fullName">Oswin Franco Cervantes</h1>
           <p class="hero-role" data-site-text="profile.role">Physics + Electrical Engineering with Computing @ MIT</p>
           <p class="hero-statement" data-site-text="profile.statement">Exploring quantum systems, integrated circuits, applied electromagnetics, and computation through research and engineering.</p>
-
           <div class="social-links" aria-label="Contact links">
-            <a class="social-link" href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin" aria-label="LinkedIn" title="LinkedIn">
-              <span aria-hidden="true">in</span>
-            </a>
-            <a class="social-link" href="mailto:cervanteso@acm.org" data-site-href="contact.email" aria-label="Email" title="Email">
-              <span aria-hidden="true">@</span>
-            </a>
-            <a class="social-link social-link--wide" href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github" aria-label="GitHub" title="GitHub">
-              <span aria-hidden="true">GH</span>
-            </a>
-            <a class="social-link social-link--wide" href="https://www.youtube.com/@Oswin_Cervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.youtube" aria-label="@Oswin_Cervantes on YouTube" title="@Oswin_Cervantes on YouTube">
-              <span aria-hidden="true">YT</span>
-            </a>
+            <a class="social-link" href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
+            <a class="social-link" href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
+            <a class="social-link" href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github">GitHub</a>
+            <a class="social-link" href="https://www.youtube.com/@Oswin_Cervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.youtube">YouTube</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="home-overview" aria-labelledby="explore-title">
-      <div class="section-heading">
-        <p class="section-kicker">Explore</p>
-        <h2 id="explore-title">Work, background, and notes.</h2>
-      </div>
+    <figure class="home-art">
+      <div class="home-art-image" role="img" aria-labelledby="artwork-title"></div>
+      <figcaption id="artwork-title" data-background-title>Caspar David Friedrich</figcaption>
+    </figure>
 
-      <div class="overview-grid">
-        <a class="overview-card" href="about.html">
-          <span class="overview-number">01</span>
-          <h3>About</h3>
-          <p>What I study, the systems I care about, and how I like to work.</p>
-          <span class="card-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="overview-card" href="projects.html">
-          <span class="overview-number">02</span>
-          <h3>Projects</h3>
-          <p>Selected work in integrated circuits, electronics, and hardware.</p>
-          <span class="card-arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="overview-card" href="notes.html">
-          <span class="overview-number">03</span>
-          <h3>Notes</h3>
-          <p>A growing archive of reports, technical notes, and working documents.</p>
-          <span class="card-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-    </section>
+    <nav class="home-overview" aria-label="Explore the website">
+      <dl class="home-directory">
+        <div>
+          <dt><a href="about.html">About</a></dt>
+          <dd>Education, research experience, skills, and coursework.</dd>
+        </div>
+        <div>
+          <dt><a href="projects.html">Projects</a></dt>
+          <dd>Quantum hardware, integrated circuits, and electronics.</dd>
+        </div>
+        <div>
+          <dt><a href="notes.html">Notes</a></dt>
+          <dd>Technical notes, reports, and working documents.</dd>
+        </div>
+      </dl>
+    </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>. All rights reserved.</p>
+      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>.</p>
       <div class="footer-links">
         <a href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
         <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
@@ -103,6 +83,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260828-1"></script>
+  <script src="script.js?v=20260905-1"></script>
 </body>
 </html>

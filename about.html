@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About — Oswin Franco Cervantes</title>
   <meta name="description" content="About Oswin Franco Cervantes, an MIT undergraduate studying physics and electrical engineering with computing.">
-  <meta name="theme-color" content="#30271c">
+  <meta name="theme-color" content="#19212b">
   <link rel="icon" type="image/png" href="assets/af-logo.png">
-  <link rel="stylesheet" href="style.css?v=20260828-2">
+  <link rel="stylesheet" href="style.css?v=20260905-1">
   <script>document.documentElement.classList.add("js");</script>
 </head>
-<body>
+<body class="about-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header">
@@ -20,10 +20,6 @@
       </a>
 
       <div class="header-actions">
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
-          <span>Menu</span>
-        </button>
-
         <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
           <a href="index.html">Home</a>
           <a href="about.html" aria-current="page">About</a>
@@ -36,16 +32,10 @@
 
   <main id="main-content" class="page-main">
     <header class="page-hero">
-      <p class="section-kicker">About</p>
-      <h1>Working across physics, circuits, and computation.</h1>
-      <p>I’m interested in the full path from physical principles to working hardware.</p>
+      <h1 id="about-title">About</h1>
     </header>
 
-    <section class="page-section about-section" aria-labelledby="about-heading">
-      <div class="section-heading">
-        <h2 id="about-heading">About</h2>
-      </div>
-
+    <section class="page-section about-section" aria-labelledby="about-title">
       <div class="about-grid">
         <div class="prose">
           <p>I’m an undergraduate at MIT studying Physics and Electrical Engineering with Computing. I’m drawn to systems, signals, and electromagnetics—the places where hardware and computation meet.</p>
@@ -69,77 +59,9 @@
       </div>
     </section>
 
-    <section class="page-section coursework-section" aria-labelledby="coursework-heading">
-      <div class="section-heading">
-        <p class="section-kicker">Coursework</p>
-        <h2 id="coursework-heading">Selected Coursework</h2>
-      </div>
-
-      <div class="coursework-grid" id="coursework-list">
-        <article class="coursework-card">
-          <h3>Computer Science &amp; Computation</h3>
-          <ul class="coursework-list">
-            <li>6.100A · Introduction to CS Programming in Python</li>
-            <li>6.1200 · Mathematics for Computer Science</li>
-            <li>6.1010 · Fundamentals of Programming</li>
-            <li>6.1903 · Introduction to Programming in C &amp; Assembly</li>
-            <li>6.1910 · Computation Structures</li>
-          </ul>
-        </article>
-
-        <article class="coursework-card">
-          <h3>Mathematics</h3>
-          <ul class="coursework-list">
-            <li>18.01 · Calculus I</li>
-            <li>18.02 · Multivariable Calculus</li>
-            <li>18.C06 · Linear Algebra and Optimization</li>
-            <li>18.03 · Differential Equations</li>
-            <li>MATH 3012 · Applied Combinatorics</li>
-          </ul>
-        </article>
-
-        <article class="coursework-card">
-          <h3>Physics</h3>
-          <ul class="coursework-list">
-            <li>8.012 · Physics I</li>
-            <li>8.022 · Physics II</li>
-            <li>8.03 · Physics III</li>
-            <li>8.20 · Introduction to Special Relativity</li>
-            <li>8.223 · Classical Mechanics II</li>
-            <li>8.04 · Quantum Physics I</li>
-            <li>8.044 · Statistical Physics</li>
-          </ul>
-        </article>
-
-        <article class="coursework-card">
-          <h3>Electrical Engineering</h3>
-          <ul class="coursework-list">
-            <li>6.2030 · Electronics First Laboratory</li>
-            <li>6.2050 · Digital Systems Laboratory</li>
-            <li>6.2000 · Electrical Circuits: Modeling and Design of Physical Systems</li>
-            <li>6.2080 · Semiconductor Electronic Circuits</li>
-            <li>6.3000 · Signal Processing</li>
-            <li>6.2090 · Solid-State Circuits</li>
-            <li><span class="course-name">6.6020 · High-Frequency Integrated Circuits</span><span class="course-level course-level--graduate">Graduate level</span></li>
-            <li><span class="course-name">6.6300 · Electromagnetics</span><span class="course-level course-level--graduate">Graduate level</span></li>
-            <li><span class="course-name">Microwave Engineering and Antennas</span><span class="course-level course-level--coursera">Coursera</span></li>
-            <li><span class="course-name">RF and Millimeter-Wave Circuit Design</span><span class="course-level course-level--coursera">Coursera</span></li>
-          </ul>
-        </article>
-
-        <article class="coursework-card">
-          <h3>Miscellaneous Classes</h3>
-          <ul class="coursework-list">
-            <li>14.01 · Principles of Microeconomics</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
     <section class="page-section" aria-labelledby="experience-heading">
       <div class="section-heading">
-        <p class="section-kicker">Experience</p>
-        <h2 id="experience-heading">Roles and teams.</h2>
+        <h2 id="experience-heading">Experience</h2>
       </div>
 
       <div class="experience-list" id="experience-list">
@@ -180,9 +102,29 @@
       </div>
     </section>
 
+    <section class="page-section" aria-labelledby="focus-heading">
+      <div class="section-heading">
+        <h2 id="focus-heading">Areas of focus</h2>
+      </div>
+
+      <div class="focus-grid" id="focus-list">
+        <article class="focus-card">
+          <h3>Quantum Physics, Photonics, Signals &amp; Applied Electromagnetics</h3>
+          <p>Exploring quantum systems, light-matter interactions, photonic devices, and how signals and energy move through practical systems.</p>
+        </article>
+        <article class="focus-card">
+          <h3>Analog &amp; Mixed-Signal Circuits, mmWave &amp; THz</h3>
+          <p>Designing and analyzing circuits and high-frequency systems across analog, mixed-signal, millimeter-wave, and terahertz regimes.</p>
+        </article>
+        <article class="focus-card">
+          <h3>Computation and Math</h3>
+          <p>Exploring algorithms, combinatorics, machine learning, and numerical methods.</p>
+        </article>
+      </div>
+    </section>
+
     <section class="page-section skills-section" aria-labelledby="skills-heading">
       <div class="section-heading">
-        <p class="section-kicker">Capabilities</p>
         <h2 id="skills-heading">Skills &amp; Expertise</h2>
       </div>
 
@@ -297,27 +239,68 @@
       </div>
     </section>
 
-    <section class="page-section" aria-labelledby="focus-heading">
+    <section class="page-section coursework-section" aria-labelledby="coursework-heading">
       <div class="section-heading">
-        <p class="section-kicker">Areas of focus</p>
-        <h2 id="focus-heading">What I’m exploring.</h2>
+        <h2 id="coursework-heading">Coursework</h2>
       </div>
 
-      <div class="focus-grid" id="focus-list">
-        <article class="focus-card">
-          <span class="focus-index">01</span>
-          <h3>Quantum Physics, Photonics, Signals &amp; Applied Electromagnetics</h3>
-          <p>Exploring quantum systems, light-matter interactions, photonic devices, and how signals and energy move through practical systems.</p>
+      <div class="coursework-grid" id="coursework-list">
+        <article class="coursework-card">
+          <h3>Computer Science &amp; Computation</h3>
+          <ul class="coursework-list">
+            <li>6.100A · Introduction to CS Programming in Python</li>
+            <li>6.1200 · Mathematics for Computer Science</li>
+            <li>6.1010 · Fundamentals of Programming</li>
+            <li>6.1903 · Introduction to Programming in C &amp; Assembly</li>
+            <li>6.1910 · Computation Structures</li>
+          </ul>
         </article>
-        <article class="focus-card">
-          <span class="focus-index">02</span>
-          <h3>Analog &amp; Mixed-Signal Circuits, mmWave &amp; THz</h3>
-          <p>Designing and analyzing circuits and high-frequency systems across analog, mixed-signal, millimeter-wave, and terahertz regimes.</p>
+
+        <article class="coursework-card">
+          <h3>Mathematics</h3>
+          <ul class="coursework-list">
+            <li>18.01 · Calculus I</li>
+            <li>18.02 · Multivariable Calculus</li>
+            <li>18.C06 · Linear Algebra and Optimization</li>
+            <li>18.03 · Differential Equations</li>
+            <li>MATH 3012 · Applied Combinatorics</li>
+          </ul>
         </article>
-        <article class="focus-card">
-          <span class="focus-index">03</span>
-          <h3>Computation and Math</h3>
-          <p>Exploring algorithms, combinatorics, machine learning, and numerical methods.</p>
+
+        <article class="coursework-card">
+          <h3>Physics</h3>
+          <ul class="coursework-list">
+            <li>8.012 · Physics I</li>
+            <li>8.022 · Physics II</li>
+            <li>8.03 · Physics III</li>
+            <li>8.20 · Introduction to Special Relativity</li>
+            <li>8.223 · Classical Mechanics II</li>
+            <li>8.04 · Quantum Physics I</li>
+            <li>8.044 · Statistical Physics</li>
+          </ul>
+        </article>
+
+        <article class="coursework-card">
+          <h3>Electrical Engineering</h3>
+          <ul class="coursework-list">
+            <li>6.2030 · Electronics First Laboratory</li>
+            <li>6.2050 · Digital Systems Laboratory</li>
+            <li>6.2000 · Electrical Circuits: Modeling and Design of Physical Systems</li>
+            <li>6.2080 · Semiconductor Electronic Circuits</li>
+            <li>6.3000 · Signal Processing</li>
+            <li>6.2090 · Solid-State Circuits</li>
+            <li><span class="course-name">6.6020 · High-Frequency Integrated Circuits</span><span class="course-level course-level--graduate">Graduate level</span></li>
+            <li><span class="course-name">6.6300 · Electromagnetics</span><span class="course-level course-level--graduate">Graduate level</span></li>
+            <li><span class="course-name">Microwave Engineering and Antennas</span><span class="course-level course-level--coursera">Coursera</span></li>
+            <li><span class="course-name">RF and Millimeter-Wave Circuit Design</span><span class="course-level course-level--coursera">Coursera</span></li>
+          </ul>
+        </article>
+
+        <article class="coursework-card">
+          <h3>Miscellaneous Classes</h3>
+          <ul class="coursework-list">
+            <li>14.01 · Principles of Microeconomics</li>
+          </ul>
         </article>
       </div>
     </section>
@@ -325,7 +308,7 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>. All rights reserved.</p>
+      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>.</p>
       <div class="footer-links">
         <a href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
         <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
@@ -334,6 +317,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260828-1"></script>
+  <script src="script.js?v=20260905-1"></script>
 </body>
 </html>

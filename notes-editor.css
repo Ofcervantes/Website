@@ -1,5 +1,5 @@
 .editor-main {
-  max-width: 1080px;
+  max-width: 880px;
 }
 
 .primary-nav a[aria-current="location"] {
@@ -7,11 +7,11 @@
 }
 
 .editor-hero {
-  padding-bottom: 76px;
+  padding-bottom: 16px;
 }
 
 .editor-section {
-  padding-top: 76px;
+  padding-top: 32px;
 }
 
 .editor-heading p {
@@ -31,7 +31,7 @@
   min-width: 0;
   padding: 28px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 2px;
   background: var(--surface);
 }
 
@@ -57,7 +57,7 @@
 .editor-field textarea {
   width: 100%;
   border: 1px solid var(--line-strong);
-  border-radius: 8px;
+  border-radius: 2px;
   background: var(--surface-soft);
   color: var(--heading);
   font: inherit;
@@ -120,7 +120,7 @@
   min-height: 44px;
   padding: 9px 15px;
   border: 1px solid var(--line-strong);
-  border-radius: 8px;
+  border-radius: 2px;
   background: var(--surface-soft);
   color: var(--heading);
   font-size: 0.86rem;
@@ -136,13 +136,13 @@
 .editor-button--primary {
   border-color: var(--accent);
   background: var(--accent);
-  color: #ffffff;
+  color: var(--background);
 }
 
 .editor-button--primary:hover {
   border-color: var(--accent-hover);
   background: var(--accent-hover);
-  color: #ffffff;
+  color: var(--background);
 }
 
 .editor-button--quiet {
@@ -204,7 +204,7 @@
   padding: 18px;
   overflow: auto;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 2px;
   background: var(--surface-soft);
   color: var(--text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
@@ -233,7 +233,7 @@
   min-height: 150px;
   padding: 52px 22px 22px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 2px;
   background: var(--surface);
   color: var(--muted);
   counter-increment: editor-step;

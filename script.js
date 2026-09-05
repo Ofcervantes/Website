@@ -131,48 +131,6 @@
     }
   }
 
-  function setupMobileNavigation() {
-    const toggle = document.getElementById("menu-toggle");
-    const navigation = document.getElementById("primary-navigation");
-    if (!toggle || !navigation) return;
-
-    const setMenuOpen = (isOpen, returnFocus = false) => {
-      toggle.setAttribute("aria-expanded", String(isOpen));
-      toggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-      navigation.classList.toggle("is-open", isOpen);
-      document.body.classList.toggle("menu-open", isOpen);
-
-      if (!isOpen && returnFocus) toggle.focus();
-    };
-
-    toggle.setAttribute("aria-controls", "primary-navigation");
-    setMenuOpen(false);
-
-    toggle.addEventListener("click", () => {
-      setMenuOpen(toggle.getAttribute("aria-expanded") !== "true");
-    });
-
-    navigation.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => setMenuOpen(false));
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
-        setMenuOpen(false, true);
-      }
-    });
-
-    document.addEventListener("click", (event) => {
-      if (
-        toggle.getAttribute("aria-expanded") === "true" &&
-        !toggle.contains(event.target) &&
-        !navigation.contains(event.target)
-      ) {
-        setMenuOpen(false);
-      }
-    });
-  }
-
   function getSetting(settings, path) {
     if (!path) return undefined;
 
@@ -339,9 +297,8 @@
     if (!validAreas.length) return;
 
     container.innerHTML = validAreas
-      .map((area, index) => `
+      .map((area) => `
         <article class="focus-card">
-          <span class="focus-index">${String(index + 1).padStart(2, "0")}</span>
           <h3>${escapeHtml(area.title)}</h3>
           ${area.description ? `<p>${escapeHtml(area.description)}</p>` : ""}
         </article>`)
@@ -424,9 +381,11 @@
         const alt = getSetting(settings, element.dataset.siteAlt);
         if (typeof alt === "string") element.setAttribute("alt", alt);
       });
+      return true;
     } catch (error) {
       // The HTML contains usable fallback content, so a settings error is non-blocking.
       console.warn("Could not load site.json; keeping the HTML fallback content", error);
+      return false;
     }
   }
 
@@ -543,7 +502,7 @@
     }
 
     container.innerHTML = validProjects
-      .map((project, index) => {
+      .map((project) => {
         const title = project.title || project.name || "Untitled project";
         const overview = project.portfolio?.summary ?? project.description ?? project.desc ?? "";
         const tags = Array.isArray(project.tags)
@@ -569,7 +528,6 @@
           <article class="portfolio-case-study">
             <header class="portfolio-case-header">
               <div>
-                <p class="portfolio-case-number">Project ${String(index + 1).padStart(2, "0")}</p>
                 <h3>${escapeHtml(title)}</h3>
               </div>
               ${project.date ? `<p class="portfolio-case-date">${escapeHtml(project.date)}</p>` : ""}
@@ -608,14 +566,16 @@
 
       if (container) renderProjects(container, projects);
       if (portfolioContainer) renderPortfolioProjects(portfolioContainer, projects);
+      return true;
     } catch (error) {
       console.error("Could not load projects.json", error);
       if (container) {
-        setMessage(container, "error", "Projects could not be loaded. Please check projects.json.");
+        setMessage(container, "error", "Projects could not be loaded. Please reload the page.");
       }
       if (portfolioContainer) {
-        setMessage(portfolioContainer, "error", "Projects could not be loaded. Please check projects.json.");
+        setMessage(portfolioContainer, "error", "Projects could not be loaded. Please reload the page.");
       }
+      return false;
     }
   }
 
@@ -660,7 +620,7 @@
 
         return `
           <article class="content-entry note-item">
-            <h2>${titleMarkup}</h2>
+            <h3>${titleMarkup}</h3>
             <div class="entry-meta note-meta">
               ${details ? `<span>${details}</span>` : ""}
               ${date ? `<time datetime="${escapeHtml(note.modified)}">${escapeHtml(date)}</time>` : ""}
@@ -688,7 +648,7 @@
       renderNotes(container, notes);
     } catch (error) {
       console.error("Could not load notes/manifest.json", error);
-      setMessage(container, "error", "Notes could not be loaded. Please check notes/manifest.json.");
+      setMessage(container, "error", "Notes could not be loaded. Please reload the page.");
     }
   }
 
@@ -698,15 +658,32 @@
 
     const status = document.getElementById("portfolio-print-status");
 
-    Promise.allSettled(loadPromises).then(() => {
+    Promise.all(loadPromises).then(async (results) => {
+      if (results.some((result) => result !== true)) {
+        throw new Error("Portfolio content is incomplete");
+      }
+      await Promise.all([...document.querySelectorAll(".portfolio-main img")].map((img) => {
+        if (typeof img.decode === "function") return img.decode();
+        if (img.complete) return img.naturalWidth > 0 ? Promise.resolve() : Promise.reject(new Error("Image unavailable"));
+        return new Promise((resolve, reject) => {
+          img.addEventListener("load", resolve, { once: true });
+          img.addEventListener("error", reject, { once: true });
+        });
+      }));
       button.disabled = false;
       document.body.dataset.portfolioReady = "true";
       if (status) {
         status.textContent = "Ready to export.";
       }
+    }).catch(() => {
+      if (status) {
+        status.textContent = "The portfolio could not be prepared. Please reload the page.";
+        status.classList.remove("visually-hidden");
+      }
     });
 
     button.addEventListener("click", () => {
+      if (button.disabled) return;
       window.print();
     });
   }
@@ -715,9 +692,8 @@
     element.textContent = String(new Date().getFullYear());
   });
 
-  setupMobileNavigation();
   const siteReady = loadSiteSettings();
   const projectsReady = loadProjects();
-  const notesReady = loadNotes();
-  setupPortfolioPrint([siteReady, projectsReady, notesReady]);
+  loadNotes();
+  setupPortfolioPrint([siteReady, projectsReady]);
 })();

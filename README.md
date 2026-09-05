@@ -14,7 +14,7 @@ For most updates, you only need three places:
 
 The remaining files control page-specific writing and the visual design:
 
-- `index.html` is the home page. Edit its introduction and section descriptions directly.
+- `index.html` is the home page. Edit its directory descriptions directly; the introduction comes from `site.json`.
 - `about.html` is the longer about page. Edit its biography paragraphs directly; its structured sections come from `site.json`.
 - `projects.html` shows expanded project sections and includes the button that assembles the print-ready PDF portfolio from `site.json` and `projects.json`.
 - `portfolio.html` only redirects older portfolio links to the Projects page; normal edits do not belong there.
@@ -41,9 +41,11 @@ Only `name` and `desc` are required. `tags`, `links`, and `date` are optional. T
 
 The editor creates the Markdown file and refreshes the note list automatically. You do not need to edit `notes/manifest.json`. For the manual file workflow, see [Add a note](#add-a-note-1) below.
 
-### Change the paper background or home-page paintings
+### Change page colors or home-page paintings
 
-The home page uses the randomized paintings by default, while About, Projects, and Notes use the tan paper background. In `site.json`, keep `appearance.artBackgrounds` set to `true` to show the paintings. Change it to `false` if you want the tan paper background on every page. Each full home-page load selects one valid painting and avoids immediately repeating the previous one in the same browser tab.
+Each page has its own dark palette: forest green for Home, blue for About, graphite for Projects, and warm brown for Notes. Edit the variables at the top of `style.css` to change these colors. The body classes `home-page`, `about-page`, `projects-page`, and `notes-page` select the page's theme.
+
+The homepage displays one of your paintings in a horizontal band beneath the introduction. In `site.json`, keep `appearance.artBackgrounds` set to `true` to show it; set it to `false` to hide the painting. Each full homepage load selects a painting and avoids immediately repeating the previous one in the same browser tab.
 
 ```json
 "appearance": {
@@ -67,14 +69,14 @@ Each background has five editable values:
 
 - `src` is the desktop image path. Put optimized WebP images in `assets/backgrounds/`; roughly 1600–2400 pixels wide is usually enough.
 - `mobileSrc` is an optional portrait crop for phones. If it is missing or invalid, the desktop image is used.
-- `title` identifies the artwork and is stored on the page as metadata.
+- `title` identifies the artwork and appears as its caption.
 - `position` and `mobilePosition` control the desktop and phone crops used by `background-size: cover`. Use safe keywords such as `left`, `center`, or `right`, or percentages such as `62% 58%`.
 
-Add, remove, or reorder objects in the array without changing the JavaScript. If the array is empty or cannot be loaded, the home page falls back to the tan paper background.
+Add, remove, or reorder objects in the array without changing the JavaScript. If the array is empty or cannot be loaded, the painting band is hidden and the introduction remains readable.
 
 ### Update profile or contact details
 
-Open `site.json` to change the name, large home-page role and statement, education, focus summary, location, photo, email, LinkedIn URL, GitHub URL, or YouTube URL in one place. Keep the quotation marks and commas valid JSON. The email value should start with `mailto:`.
+Open `site.json` to change the name, homepage role and statement, education, focus summary, location, photo, email, LinkedIn URL, GitHub URL, or YouTube URL in one place. Keep the quotation marks and commas valid JSON. The email value should start with `mailto:`.
 
 The resume is not published on the website. To build a private local copy, edit `resume/Oswin_Cervantes_Resume.tex` and run `./scripts/build_resume.sh`; the PDF is written to `output/pdf/Oswin_Cervantes_Resume.pdf`.
 
@@ -87,7 +89,7 @@ The HTML keeps fallback copies of these details so the pages remain readable if 
 - `data-site-src="profile.photo"` replaces an image source.
 - `data-site-alt="profile.photoAlt"` replaces image alternative text.
 
-The large home-page hero uses `data-site-text="profile.fullName"`, `data-site-text="profile.role"`, and `data-site-text="profile.statement"`. Edit those three values in `site.json`; the layout stays in `index.html`.
+The homepage introduction uses `data-site-text="profile.fullName"`, `data-site-text="profile.role"`, and `data-site-text="profile.statement"`. Edit those three values in `site.json`; the layout stays in `index.html`.
 
 If you add another repeated value, put it in `site.json` and mark the matching HTML element with the appropriate attribute. Leave sensible text, links, and image paths in the HTML as a no-JavaScript fallback.
 
@@ -145,8 +147,8 @@ Coursework items may be simple text or a structured object. The `url` and `level
 
 Open `projects.html` through the local preview or published website. The normal page shows the expanded projects, while its Portfolio PDF button adds the print cover, experience, skills, and coursework from `site.json` and `projects.json`.
 
-1. Wait until the PDF panel says the content is ready.
-2. Choose **Save PDF**.
+1. Wait until the **Portfolio PDF** button is available.
+2. Choose **Portfolio PDF**.
 3. Select **Save as PDF** in the browser print dialog.
 4. Turn off the browser’s own headers and footers for the cleanest result.
 
@@ -154,20 +156,17 @@ The screen page and printed PDF have separate layouts, so you should not duplica
 
 ### Navigation and color palette
 
-The responsive menu does not need a framework. Its HTML hooks are:
+The four navigation links are always visible, including on phones. Their HTML hook is:
 
 ```html
-<button id="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false">
-  Menu
-</button>
 <nav id="primary-navigation" aria-label="Primary navigation">
   <!-- page links -->
 </nav>
 ```
 
-On small screens, CSS should hide `#primary-navigation` by default and show `#primary-navigation.is-open`. While the menu is open, JavaScript also adds `.menu-open` to `<body>`, which CSS may use to prevent background scrolling. The menu closes after a navigation click, an outside click, or Escape; Escape returns focus to the menu button.
+Set `aria-current="page"` on the link matching the current page. The shared navigation needs no JavaScript.
 
-The website uses one fixed dark-paper color palette. To adjust it later, edit the color variables in the `:root` block at the top of `style.css`; there is no visitor-facing theme switch or saved mode preference.
+Georgia typography and navigation are shared across the site. Each page has a fixed dark palette, with no theme switch or saved mode preference. About uses section labels in the margin, Projects uses expanded technical write-ups, and Notes uses a narrower reading column. The `@media print` block at the end of `style.css` controls the white-paper portfolio separately; project descriptions remain expanded and flow continuously without forced page breaks.
 
 ### Add or edit a project
 

@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Notes — Oswin Franco Cervantes</title>
   <meta name="description" content="Technical notes, reports, and working documents by Oswin Franco Cervantes.">
-  <meta name="theme-color" content="#30271c">
+  <meta name="theme-color" content="#26211e">
   <link rel="icon" type="image/png" href="assets/af-logo.png">
-  <link rel="stylesheet" href="style.css?v=20260828-2">
+  <link rel="stylesheet" href="style.css?v=20260905-1">
   <script>document.documentElement.classList.add("js");</script>
 </head>
-<body>
+<body class="notes-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <header class="site-header">
@@ -20,10 +20,6 @@
       </a>
 
       <div class="header-actions">
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
-          <span>Menu</span>
-        </button>
-
         <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
@@ -36,16 +32,12 @@
 
   <main id="main-content" class="page-main">
     <header class="page-hero">
-      <p class="section-kicker">Notes</p>
-      <h1>A working archive.</h1>
-      <p>Technical notes, reports, and documents collected as I learn and build. This page is continually under development as the archive grows.</p>
+      <h1>Notes</h1>
+      <p>Technical notes, reports, and working documents. This archive is continually under development.</p>
     </header>
 
-    <section class="page-section" aria-labelledby="notes-heading">
-      <div class="section-heading section-heading--row">
-        <h2 id="notes-heading">Notes</h2>
-        <p>PDF and Markdown</p>
-      </div>
+    <section class="page-section notes-section" aria-labelledby="notes-heading">
+      <h2 class="visually-hidden" id="notes-heading">Published notes</h2>
 
       <div id="notes-list" class="content-list" aria-live="polite">
         <p class="status-message">Loading notes…</p>
@@ -56,7 +48,7 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>. All rights reserved.</p>
+      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>.</p>
       <div class="footer-links">
         <a href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
         <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
@@ -66,6 +58,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260828-1"></script>
+  <script src="script.js?v=20260905-1"></script>
 </body>
 </html>

@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects &amp; Portfolio — Oswin Franco Cervantes</title>
   <meta name="description" content="Expanded engineering projects and a print-ready portfolio by Oswin Franco Cervantes.">
-  <meta name="theme-color" content="#30271c">
+  <meta name="theme-color" content="#202122">
   <link rel="icon" type="image/png" href="assets/af-logo.png">
-  <link rel="stylesheet" href="style.css?v=20260828-2">
+  <link rel="stylesheet" href="style.css?v=20260905-1">
   <script>document.documentElement.classList.add("js");</script>
 </head>
 <body class="portfolio-page projects-page">
@@ -20,10 +20,6 @@
       </a>
 
       <div class="header-actions">
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
-          <span>Menu</span>
-        </button>
-
         <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
@@ -90,26 +86,19 @@
     </section>
 
     <header class="page-hero projects-screen-hero projects-screen-only" id="portfolio">
-      <p class="section-kicker">Projects</p>
-      <h1>Selected work.</h1>
-      <p class="projects-portfolio-summary">Projects across integrated circuits, electronics, and system design. This page is continually under development as new work is added.</p>
+      <h1>Projects</h1>
+      <p class="projects-portfolio-summary">Selected work in circuits, quantum hardware, and system design. This page is continually under development.</p>
 
       <aside class="portfolio-toolbar portfolio-toolbar--quiet" aria-label="Portfolio PDF export">
-        <p><span class="portfolio-toolbar-label">Portfolio PDF</span> <span id="portfolio-print-status">Preparing…</span></p>
+        <span class="visually-hidden" id="portfolio-print-status" role="status">Preparing portfolio…</span>
         <button class="portfolio-print-button portfolio-print-button--quiet" id="portfolio-print" type="button" disabled>
-          Save PDF
+          Portfolio PDF
         </button>
       </aside>
     </header>
 
     <section class="page-section portfolio-section portfolio-projects-section" aria-labelledby="portfolio-projects-heading">
-      <div class="section-heading section-heading--row">
-        <div>
-          <p class="section-kicker">Selected work</p>
-          <h2 id="portfolio-projects-heading">Projects</h2>
-        </div>
-        <p>Purpose · challenge · contribution · outcome</p>
-      </div>
+      <h2 class="visually-hidden" id="portfolio-projects-heading">Project descriptions</h2>
 
       <div id="portfolio-projects-list" class="portfolio-case-list" aria-live="polite">
         <p class="status-message">Loading projects…</p>
@@ -131,7 +120,7 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>. All rights reserved.</p>
+      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>.</p>
       <div class="footer-links">
         <a href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
         <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
@@ -141,6 +130,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260828-1"></script>
+  <script src="script.js?v=20260905-1"></script>
 </body>
 </html>
