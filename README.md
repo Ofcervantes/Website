@@ -1,5 +1,20 @@
 # Oswin Cervantes's website
 
+## Write in Obsidian
+
+In Obsidian, choose **Open folder as vault** and select this repository's top-level folder (the one containing this README). New notes go in `project-docs/` as Projects. Create a note in `project-docs/articles/` for an Article. Pasting a picture saves it in `project-docs/attachments/`. Obsidian writes relative Markdown links that work on the site. [Obsidian’s vault guide](https://help.obsidian.md/vault)
+
+After saving your changes, run these commands in a terminal from the same folder.
+
+```sh
+git add -- project-docs subjects.json
+git diff --cached --stat
+git commit -m "Publish my latest notes"
+git push origin main
+```
+
+The first command stages all changed notes, attachments, and subject labels. To publish one note, list its path and any new images after `git add --`. GitHub Pages rebuilds the site after the push.
+
 ## Add a reference
 
 | Label | Where to put it | Example |

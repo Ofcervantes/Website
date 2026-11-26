@@ -1,0 +1,8 @@
+{
+  "newFileLocation": "folder",
+  "newFileFolderPath": "project-docs",
+  "attachmentFolderPath": "project-docs/attachments",
+  "useMarkdownLinks": true,
+  "newLinkFormat": "relative",
+  "userIgnoreFilters": ["_site/"]
+}
