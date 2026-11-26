@@ -152,23 +152,43 @@ def project_pdfs(output):
                     raise ValueError(f"Expected a PDF for {href}")
                 relative = source.relative_to(ROOT)
                 copy_public_file(relative, output)
-                key = "/" + quote(relative.as_posix())
-                href = urlunsplit(("", "", key, url.query, url.fragment))
+                key = relative.as_posix()
+                href = urlunsplit(("", "", "/" + quote(key), url.query, url.fragment))
             record = pdfs.setdefault(key, {"title": title, "url": href, "keywords": []})
             record["keywords"].append(search)
     return pdfs
 
 
-def document_row(kind, title, url, text="", *, summary="", thumbnail="", published=date.min):
+def read_subjects():
+    """Look up each document's labels by its source path in the repository."""
+    path = ROOT / "subjects.json"
+    if not path.is_file():
+        return {}
+    subjects = json.loads(path.read_text(encoding="utf-8-sig"))
+    for source, labels in subjects.items():
+        if not isinstance(labels, list) or not all(isinstance(label, str) for label in labels):
+            raise ValueError(f"Expected a list of subject names for {source} in subjects.json")
+        cleaned = []
+        for label in labels:
+            label = label.strip()
+            if label and label not in cleaned:
+                cleaned.append(label)
+        subjects[source] = cleaned
+    return subjects
+
+
+def document_row(kind, title, url, text="", *, summary="", thumbnail="", published=date.min, subjects=()):
     label = "PDF" if kind == "pdf" else kind.title()
     if published != date.min:
         label += f" · {published.isoformat()}"
     hidden = " hidden" if kind in ("about", "coursework") else ""
+    subject_labels = "".join(f' <span class="document-subject">{escape(subject)}</span>' for subject in subjects)
     image = (f'<img class="document-thumbnail" src="{escape(thumbnail)}" alt="" loading="lazy" '
              'width="96" height="72">' if thumbnail else "")
     excerpt = f'<span class="document-summary">{escape(summary)}</span>' if summary else ""
     return (f'<li data-type="{kind}" data-search="{escape(text)}"{hidden}><a href="{escape(url)}">{image}'
-            f'<span class="document-title">{escape(title)}</span><span class="document-format">{label}</span>'
+            f'<span class="document-title">{escape(title)}</span>'
+            f'<span class="document-meta"><span class="document-format">{label}</span>{subject_labels}</span>'
             f'{excerpt}</a></li>')
 
 
@@ -181,6 +201,7 @@ def about_rows(settings):
     if paintings:
         text = " ".join([paintings.get("artist", ""), *paintings.get("titles", [])])
         yield document_row("about", "My favorite paintings", "index.html#favorite-paintings", text)
+    yield document_row("about", "Oswin Mix", "index.html#playlist", "YouTube music playlist")
     for index, group in enumerate(settings.get("coursework", []), start=1):
         if not isinstance(group, dict) or not isinstance(group.get("items"), list):
             continue
@@ -200,12 +221,13 @@ def build(output):
         copy_public_file(name, output)
 
     template = (ROOT / "documentation.html").read_text(encoding="utf-8-sig")
-    marker = "<!-- document-list -->"
-    if template.count(marker) != 1:
-        raise ValueError(f"Expected one {marker} in documentation.html")
+    list_marker = "<!-- document-list -->"
+    if template.count(list_marker) != 1:
+        raise ValueError(f"Expected one {list_marker} in documentation.html")
     sources = ROOT / "project-docs"
     articles = []
     pdfs = project_pdfs(output)
+    subjects = read_subjects()
     for source in sorted(sources.rglob("*")):
         relative = source.relative_to(ROOT)
         if source.is_symlink() or not source.is_file() or any(part.startswith(".") for part in relative.parts):
@@ -213,24 +235,30 @@ def build(output):
         if source.suffix.lower() == ".md":
             record = render_project(source, relative, template, output)
             record["type"] = "article" if relative.parts[1] == "articles" else "project"
+            record["subjects"] = subjects.get(relative.as_posix(), [])
             articles.append((article_date(source), record))
         elif source.suffix.lower() == ".pdf":
-            url = "/" + quote(relative.as_posix())
-            if url not in pdfs:
+            key = relative.as_posix()
+            if key not in pdfs:
                 copy_public_file(relative, output)
                 title = re.sub(r"[-_]+", " ", source.stem).strip()
-                pdfs[url] = {"title": title, "url": url, "keywords": []}
+                pdfs[key] = {"title": title, "url": "/" + quote(key), "keywords": []}
         elif source.suffix.lower() in IMAGE_EXTENSIONS:
             copy_public_file(relative, output)
 
     articles.sort(key=lambda item: (-item[0].toordinal(), item[1]["title"].casefold()))
-    rows = [document_row(record["type"], record["title"], record["url"], record["text"],
-                         summary=record["summary"], thumbnail=record.get("thumbnail"), published=published)
-            for published, record in articles]
-    rows.extend(document_row("pdf", pdf["title"], pdf["url"], " ".join(pdf["keywords"])) for pdf in pdfs.values())
+    rows = []
+    for published, record in articles:
+        rows.append(document_row(record["type"], record["title"], record["url"], record["text"],
+                                 summary=record["summary"], thumbnail=record.get("thumbnail"),
+                                 published=published, subjects=record["subjects"]))
+    for path, pdf in pdfs.items():
+        labels = subjects.get(path, [])
+        rows.append(document_row("pdf", pdf["title"], pdf["url"], " ".join(pdf["keywords"]), subjects=labels))
     settings = json.loads((ROOT / "site.json").read_text(encoding="utf-8-sig"))
     rows.extend(about_rows(settings))
-    (output / "documentation.html").write_text(template.replace(marker, "\n".join(rows)), encoding="utf-8")
+    page = template.replace(list_marker, "\n".join(rows))
+    (output / "documentation.html").write_text(page, encoding="utf-8")
     records = [record for _, record in articles]
     (output / "project-articles.json").write_text(json.dumps(records, ensure_ascii=False), encoding="utf-8")
     print(f"Built {len(records)} Markdown pages and {len(pdfs)} PDFs in {output}")

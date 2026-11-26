@@ -10,11 +10,23 @@
 
 For Markdown, start with `# Your title`. The first paragraph appears in the list. To add a picture, put it next to the file and write `![Circuit diagram](circuit.png)`. The first picture also becomes the thumbnail. A new PDF takes its title from its filename, so `lab-notes.pdf` appears as “lab notes”.
 
-Commit and push to `main` to publish. The site adds the entry to Documentation and assigns its label automatically.
+Commit and push to `main` to publish. The site adds the entry to Documentation and assigns its type automatically.
+
+## Edit subject labels
+
+Open [subjects.json](subjects.json). Each entry pairs a file's path in this repository with its subject labels. For example, the voltage-gain note covers both logarithms and circuit design.
+
+```json
+{
+  "project-docs/articles/voltage-gain.md": ["Math", "Engineering"]
+}
+```
+
+Use any subject name, including a phrase like `Applied Math`. The labels appear beside the document and in the subject filter when you rebuild. Files without labels still appear under **All subjects**.
 
 ## Learn the code
 
-- [documentation.html](documentation.html) contains the search box, type dropdown, and list. [search.js](search.js) hides rows that don’t match.
+- [documentation.html](documentation.html) contains the search box, filters, and list. [search.js](search.js) hides rows that don’t match.
 - [index.html](index.html) lays out About. [style.css](style.css) styles both pages. [gallery.js](gallery.js) advances the paintings every six seconds.
 - [site.json](site.json) holds the profile and coursework. [script.js](script.js) displays them. Keep the built-in About text in sync for readers with JavaScript disabled.
 - [build_projects.py](scripts/build_projects.py) turns Markdown into pages and lists the PDFs. [projects.json](projects.json) supplies the titles and links for the original presentation PDFs.

@@ -1,0 +1,7 @@
+{
+  "project-docs/articles/voltage-gain.md": ["Math", "Engineering"],
+  "project-docs/amplifier-module.md": ["Engineering"],
+  "assets/Amplifier_Module/Amplifier_Module_FinalReport.pdf": ["Engineering"],
+  "assets/LC_Filter/LCFilter_Design_Project.pdf": ["Physics", "Engineering"],
+  "assets/Volteon/Amazon_Project_Volteon.pdf": ["Engineering"]
+}

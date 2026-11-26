@@ -7,7 +7,7 @@
   <meta name="description" content="Concept notes, project write-ups, and PDFs by Oswin Franco Cervantes.">
   <meta name="theme-color" content="#fafaf8">
   <link rel="icon" type="image/png" href="assets/af-logo.png">
-  <link rel="stylesheet" href="style.css?v=20261125-11">
+  <link rel="stylesheet" href="style.css?v=20261126-1">
   <script type="module" src="script.js"></script>
 </head>
 <body>
@@ -29,13 +29,18 @@
     <form class="site-search" role="search" aria-label="Site search" hidden>
       <label for="search" class="visually-hidden">Search the site</label>
       <div class="search-field">
-        <input id="search" name="q" type="search" placeholder="Search the site" enterkeyhint="search">
-        <button type="button" id="clear-search" hidden>Clear</button>
+        <div class="search-query">
+          <input id="search" name="q" type="search" placeholder="Search the site" enterkeyhint="search">
+          <button type="button" id="clear-search" hidden>Clear</button>
+        </div>
         <select id="type-filter" name="type" aria-label="Filter by type">
           <option value="all">All types</option>
           <option value="article">Articles</option>
           <option value="pdf">PDFs</option>
           <option value="project">Projects</option>
+        </select>
+        <select id="subject-filter" name="subject" aria-label="Filter by subject">
+          <option value="">All subjects</option>
         </select>
       </div>
       <p id="search-status" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -43,7 +48,7 @@
     <ul class="document-list" id="project-documents" role="list">
       <!-- document-list -->
     </ul>
-    <script type="module" src="search.js"></script>
+    <script type="module" src="search.js?v=20261126-1"></script>
   </main>
   <footer class="site-footer">
     <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span></p>
