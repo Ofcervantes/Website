@@ -206,6 +206,16 @@ ul, ol { padding-left: 1.3em; }
 .painting-gallery a, .painting-gallery picture { display: block; }
 .painting-gallery figcaption { margin-top: 5px; }
 
+.playlist-player {
+  display: block;
+  width: min(100%, 640px);
+  height: auto;
+  min-height: 200px;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 8px;
+  border: 0;
+}
+
 .coursework-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
