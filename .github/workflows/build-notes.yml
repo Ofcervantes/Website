@@ -7,37 +7,42 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Markdown renderer
+        run: python -m pip install markdown-it-py==3.0.0
+
       - name: Assemble public site
-        run: |
-          mkdir -p _site
-          cp index.html about.html documentation.html projects.html portfolio.html notes.html \
-            style.css script.js site.json projects.json CNAME .nojekyll _site/
-          cp --parents assets/af-logo.png assets/oswin-profile.png \
-            assets/Amplifier_Module/Amplifier_Module_FinalReport.pdf \
-            assets/LC_Filter/LCFilter_Design_Project.pdf \
-            assets/Volteon/Amazon_Project_Volteon.pdf _site/
+        run: python scripts/build_projects.py
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4

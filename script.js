@@ -76,10 +76,10 @@
     if (!container || !Array.isArray(groups)) return;
 
     const validGroups = groups
-      .filter((group) => group && typeof group === "object")
-      .map((group) => ({
-        name: String(group.group || group.name || "Coursework").trim(),
-        items: Array.isArray(group.items)
+      .map((group, index) => ({
+        id: "coursework-" + (index + 1),
+        name: String(group?.group || group?.name || "Coursework").trim(),
+        items: Array.isArray(group?.items)
           ? group.items.map(normalizeCourseworkItem).filter(Boolean)
           : [],
       }))
@@ -89,7 +89,7 @@
 
     container.innerHTML = validGroups
       .map((group) => `
-        <article class="coursework-card">
+        <article class="coursework-card" id="${group.id}">
           <h3>${escapeHtml(group.name)}</h3>
           <ul class="coursework-list">
             ${group.items.map((item) => {
@@ -115,7 +115,7 @@
       .join("");
   }
 
-  async function loadSiteSettings() {
+  async function loadSiteSettings(settingsPromise) {
     const textElements = [...document.querySelectorAll("[data-site-text]")];
     const linkElements = [...document.querySelectorAll("[data-site-href]")];
     const sourceElements = [...document.querySelectorAll("[data-site-src]")];
@@ -133,7 +133,7 @@
     }
 
     try {
-      const settings = await fetchJson("site.json");
+      const settings = await settingsPromise;
 
       renderCoursework(courseworkContainer, settings.coursework);
 
@@ -189,51 +189,154 @@
     return response.json();
   }
 
-  async function loadProjectDocuments() {
-    const list = document.getElementById("project-documents");
-    if (!list) return;
-
-    try {
-      const { projects } = await fetchJson("projects.json");
-      if (!Array.isArray(projects)) throw new Error("Expected a projects array");
-
-      const documents = projects.flatMap((project) =>
-        (project?.links ?? []).map((link) => ({
-          href: safeHref(link?.url, ["http:", "https:"]),
-          title: String(link?.label || project?.name || "").replace(/\s*\(PDF\)$/i, "").trim(),
-        }))
-      );
-
-      const rows = documents.map(({ href, title }) => {
-        if (!href || !title || !/\.pdf$/i.test(new URL(href, window.location.href).pathname)) {
-          throw new Error("Expected a title and PDF link");
-        }
-
-        const item = document.createElement("li");
-        const link = document.createElement("a");
-        const label = document.createElement("span");
-        const format = document.createElement("span");
-
-        link.href = href;
-        label.className = "document-title";
-        label.textContent = title;
-        format.className = "document-format";
-        format.textContent = "PDF";
-        link.append(label, format);
-        item.append(link);
-        return item;
-      });
-
-      list.replaceChildren(...rows);
-    } catch (error) {
-      console.warn("Keeping the static document links", error);
+  function documentRow(record) {
+    const row = document.createElement("li");
+    const link = document.createElement("a");
+    const title = document.createElement("span");
+    const format = document.createElement("span");
+    link.href = record.url;
+    title.className = "document-title";
+    title.textContent = record.title;
+    format.className = "document-format";
+    format.textContent = record.format;
+    if (record.thumbnail) {
+      const image = document.createElement("img");
+      image.className = "document-thumbnail";
+      image.src = record.thumbnail;
+      image.alt = "";
+      image.loading = "lazy";
+      image.width = 96;
+      image.height = 72;
+      link.append(image);
     }
+    link.append(title, format);
+    row.append(link);
+    return row;
+  }
+
+  function updatePdfRows(list, projects) {
+    const records = projects.flatMap((project) =>
+      (project?.links ?? []).map((link) => ({
+        url: safeHref(link?.url, ["http:", "https:"]),
+        title: String(link?.label || project?.name || "").replace(/\s*\(PDF\)$/i, "").trim(),
+        text: project.name,
+        format: "PDF",
+      }))
+    );
+    if (!records.every((record) => record.url && record.title && /\.pdf$/i.test(new URL(record.url, document.baseURI).pathname))) {
+      throw new Error("Expected a title and PDF link");
+    }
+    list.querySelectorAll("[data-pdf]").forEach((row) => row.remove());
+    for (const record of records) {
+      const row = documentRow(record);
+      row.dataset.pdf = "";
+      list.append(row);
+    }
+    return records;
+  }
+
+  function aboutRecords(settings) {
+    const profile = settings.profile || {};
+    const records = [{
+      title: "About " + (profile.fullName || "").trim(),
+      url: "index.html", format: "About", text: [profile.role, profile.statement].join(" "),
+    }];
+    for (const [index, group] of (settings.coursework || []).entries()) {
+      for (const entry of group.items || []) {
+        const item = normalizeCourseworkItem(entry);
+        if (item) records.push({
+          title: item.label, format: "Coursework", text: [group.group || group.name, item.level].join(" "),
+          url: "index.html#coursework-" + (index + 1),
+        });
+      }
+    }
+    return records;
+  }
+
+  function normalizeSearch(value) {
+    return value.toLowerCase().normalize("NFKD").replace(/\p{M}/gu, "").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  }
+
+  async function enableSearch(settingsPromise) {
+    const form = document.querySelector(".site-search");
+    if (!form) return;
+    const input = document.getElementById("search");
+    const clear = document.getElementById("clear-search");
+    const status = document.getElementById("search-status");
+    const list = document.getElementById("project-documents");
+    const results = document.getElementById("search-results");
+    const records = new Map();
+    let loading = true;
+    function indexRecord(record) {
+      const key = new URL(record.url, document.baseURI).href + "\n" + record.title;
+      records.set(key, {...record, keywords: normalizeSearch([record.title, record.format, record.text].join(" "))});
+    }
+    function showResults() {
+      const terms = normalizeSearch(input.value).split(" ").filter(Boolean);
+      const active = input.value.trim() !== "";
+      const matches = active && terms.length
+        ? Array.from(records.values()).filter((record) => terms.every((term) => record.keywords.includes(term)))
+        : [];
+      results.replaceChildren(...matches.map(documentRow));
+      results.hidden = matches.length === 0;
+      list.hidden = active;
+      clear.hidden = !input.value;
+      status.textContent = !active ? "" : loading ? "Searching…" : matches.length
+        ? matches.length + (matches.length === 1 ? " result" : " results")
+        : "No results found.";
+    }
+
+    form.hidden = false;
+    const currentUrl = new URL(location.href);
+    input.value = currentUrl.searchParams.get("q") || "";
+    for (const link of list.querySelectorAll("a")) {
+      indexRecord({
+        url: link.href, title: link.querySelector(".document-title").textContent,
+        format: link.querySelector(".document-format")?.textContent || "Article",
+        text: link.textContent,
+      });
+    }
+    function onInput() {
+      const url = new URL(location.href);
+      if (input.value.trim()) url.searchParams.set("q", input.value.trim());
+      else url.searchParams.delete("q");
+      history.replaceState(null, "", url);
+      showResults();
+    }
+    input.addEventListener("input", onInput);
+    form.addEventListener("submit", (event) => { event.preventDefault(); onInput(); });
+    clear.addEventListener("click", () => { input.value = ""; onInput(); input.focus(); });
+    if (location.hash === "#search") input.focus();
+    showResults();
+
+    const [pdfs, articles, about] = await Promise.allSettled([
+      fetchJson("projects.json").then((data) => updatePdfRows(list, data.projects)),
+      fetchJson("project-articles.json"), settingsPromise,
+    ]);
+    // Use the rendered catalog when an index is temporarily unavailable.
+    if (pdfs.status === "fulfilled") {
+      for (const [key, record] of records) if (record.format === "PDF") records.delete(key);
+      pdfs.value.forEach(indexRecord);
+    }
+    if (articles.status === "fulfilled") {
+      for (const article of articles.value) {
+        const url = safeHref(article.url, ["http:", "https:"]);
+        if (url) indexRecord({
+          title: article.title, url, format: "Article", text: [article.summary, article.text].join(" "),
+          thumbnail: safeHref(article.thumbnail, ["http:", "https:"]),
+        });
+      }
+    }
+    if (about.status === "fulfilled") aboutRecords(about.value).forEach(indexRecord);
+    loading = false;
+    showResults();
   }
 
   document.querySelectorAll("[data-current-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());
   });
 
-  loadSiteSettings();
-  loadProjectDocuments();
+  const settingsPromise = fetchJson("site.json");
+  loadSiteSettings(settingsPromise);
+  enableSearch(settingsPromise);
 })();

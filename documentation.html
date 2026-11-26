@@ -7,8 +7,8 @@
   <meta name="description" content="Project reports and presentations by Oswin Franco Cervantes.">
   <meta name="theme-color" content="#f9f8f5">
   <link rel="icon" type="image/png" href="assets/af-logo.png">
-  <link rel="stylesheet" href="style.css?v=20261125-2">
-  <script src="script.js?v=20261125-2" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261125-4">
+  <script src="script.js?v=20261125-4" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -26,20 +26,31 @@
   </header>
   <main id="main-content" class="page-main">
     <h1>Documentation</h1>
+    <form class="site-search" role="search" aria-label="Site search" hidden>
+      <label for="search" class="visually-hidden">Search the site</label>
+      <div class="search-field">
+        <input id="search" name="q" type="search" placeholder="Search projects, articles, or coursework" enterkeyhint="search">
+        <button type="button" id="clear-search" hidden>Clear</button>
+      </div>
+      <p id="search-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </form>
+    <noscript><p>Enable JavaScript to search. Browse project documents below.</p></noscript>
+    <ul class="document-list" id="search-results" aria-label="Search results" hidden></ul>
     <ul class="document-list" id="project-documents" role="list">
-      <li>
+      <!-- project-articles -->
+      <li data-pdf>
         <a href="assets/LC_Filter/LCFilter_Design_Project.pdf">
           <span class="document-title">On-chip LC filter design presentation</span>
           <span class="document-format">PDF</span>
         </a>
       </li>
-      <li>
+      <li data-pdf>
         <a href="assets/Amplifier_Module/Amplifier_Module_FinalReport.pdf">
           <span class="document-title">Amplifier module presentation</span>
           <span class="document-format">PDF</span>
         </a>
       </li>
-      <li>
+      <li data-pdf>
         <a href="assets/Volteon/Amazon_Project_Volteon.pdf">
           <span class="document-title">Volteon project presentation</span>
           <span class="document-format">PDF</span>
