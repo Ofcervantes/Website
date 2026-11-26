@@ -4,85 +4,110 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Oswin Franco Cervantes</title>
-  <meta name="description" content="The personal site of Oswin Franco Cervantes: physics, electrical engineering, projects, and notes.">
-  <meta name="theme-color" content="#1c211e">
+  <meta name="description" content="About Oswin Franco Cervantes, an MIT undergraduate studying physics and electrical engineering with computing.">
+  <meta name="theme-color" content="#f9f8f5">
   <link rel="icon" type="image/png" href="assets/af-logo.png">
-  <link rel="stylesheet" href="style.css?v=20260905-1">
-  <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="style.css?v=20261125-2">
+  <script src="script.js?v=20261125-2" defer></script>
 </head>
-<body class="home-page">
+<body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-
   <header class="site-header">
     <div class="nav-shell">
       <a class="brand" href="index.html" aria-label="Oswin Cervantes home">
-        <img class="brand-logo" src="assets/af-logo.png" alt="" aria-hidden="true">
+        <img class="brand-logo" src="assets/af-logo.png" width="28" height="28" alt="">
+        <span class="brand-label">Oswin Cervantes</span>
       </a>
-
-      <div class="header-actions">
-        <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation">
-          <a href="index.html" aria-current="page">Home</a>
-          <a href="about.html">About</a>
-          <a href="projects.html">Projects</a>
-          <a href="notes.html">Notes</a>
-        </nav>
-      </div>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="index.html" aria-current="page">About</a>
+        <a href="documentation.html">Documentation</a>
+      </nav>
     </div>
   </header>
-
-  <main id="main-content" class="home-main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-layout">
-        <img class="hero-photo" src="assets/oswin-profile.png" width="100" height="122" alt="Portrait of Oswin Franco Cervantes" data-site-src="profile.photo" data-site-alt="profile.photoAlt">
-        <div class="hero-copy">
-          <h1 id="hero-title" data-site-text="profile.fullName">Oswin Franco Cervantes</h1>
-          <p class="hero-role" data-site-text="profile.role">Physics + Electrical Engineering with Computing @ MIT</p>
-          <p class="hero-statement" data-site-text="profile.statement">Exploring quantum systems, integrated circuits, applied electromagnetics, and computation through research and engineering.</p>
-          <div class="social-links" aria-label="Contact links">
-            <a class="social-link" href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
-            <a class="social-link" href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
-            <a class="social-link" href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github">GitHub</a>
-            <a class="social-link" href="https://www.youtube.com/@Oswin_Cervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.youtube">YouTube</a>
-          </div>
+  <main id="main-content" class="page-main about-main">
+    <section class="profile" aria-labelledby="profile-title">
+      <div class="profile-copy">
+        <h1 id="profile-title" data-site-text="profile.fullName">Oswin Franco Cervantes</h1>
+        <p class="profile-role" data-site-text="profile.role">Physics + Electrical Engineering with Computing @ MIT</p>
+        <p class="profile-statement" data-site-text="profile.statement">Exploring quantum systems, integrated circuits, applied electromagnetics, and computation through research and engineering.</p>
+        <div class="social-links" aria-label="Contact links">
+          <a class="social-link" href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
+          <a class="social-link" href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
+          <a class="social-link" href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github">GitHub</a>
+          <a class="social-link" href="https://www.youtube.com/@Oswin_Cervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.youtube">YouTube</a>
         </div>
       </div>
+      <img class="profile-photo" src="assets/oswin-profile.png" width="132" height="158" alt="Portrait of Oswin Franco Cervantes" data-site-src="profile.photo" data-site-alt="profile.photoAlt">
     </section>
 
-    <figure class="home-art">
-      <div class="home-art-image" role="img" aria-labelledby="artwork-title"></div>
-      <figcaption id="artwork-title" data-background-title>Caspar David Friedrich</figcaption>
-    </figure>
-
-    <nav class="home-overview" aria-label="Explore the website">
-      <dl class="home-directory">
-        <div>
-          <dt><a href="about.html">About</a></dt>
-          <dd>Education, research experience, skills, and coursework.</dd>
-        </div>
-        <div>
-          <dt><a href="projects.html">Projects</a></dt>
-          <dd>Quantum hardware, integrated circuits, and electronics.</dd>
-        </div>
-        <div>
-          <dt><a href="notes.html">Notes</a></dt>
-          <dd>Technical notes, reports, and working documents.</dd>
-        </div>
-      </dl>
-    </nav>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span>.</p>
-      <div class="footer-links">
-        <a href="mailto:cervanteso@acm.org" data-site-href="contact.email">Email</a>
-        <a href="https://www.linkedin.com/in/ocerv/" target="_blank" rel="noopener noreferrer" data-site-href="contact.linkedin">LinkedIn</a>
-        <a href="https://github.com/Ofcervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.github">GitHub</a>
-        <a href="https://www.youtube.com/@Oswin_Cervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.youtube">YouTube</a>
+    <section class="page-section coursework-section" aria-labelledby="coursework-heading">
+      <div class="section-heading">
+        <h2 id="coursework-heading">Coursework</h2>
       </div>
-    </div>
-  </footer>
 
-  <script src="script.js?v=20260905-1"></script>
+      <div class="coursework-grid" id="coursework-list">
+        <article class="coursework-card">
+          <h3>Computer Science &amp; Computation</h3>
+          <ul class="coursework-list">
+            <li>6.100A · Introduction to CS Programming in Python</li>
+            <li>6.1200 · Mathematics for Computer Science</li>
+            <li>6.1010 · Fundamentals of Programming</li>
+            <li>6.1903 · Introduction to Programming in C &amp; Assembly</li>
+            <li>6.1910 · Computation Structures</li>
+          </ul>
+        </article>
+
+        <article class="coursework-card">
+          <h3>Mathematics</h3>
+          <ul class="coursework-list">
+            <li>18.01 · Calculus I</li>
+            <li>18.02 · Multivariable Calculus</li>
+            <li>18.C06 · Linear Algebra and Optimization</li>
+            <li>18.03 · Differential Equations</li>
+            <li>MATH 3012 · Applied Combinatorics</li>
+          </ul>
+        </article>
+
+        <article class="coursework-card">
+          <h3>Physics</h3>
+          <ul class="coursework-list">
+            <li>8.012 · Physics I</li>
+            <li>8.022 · Physics II</li>
+            <li>8.03 · Physics III</li>
+            <li>8.20 · Introduction to Special Relativity</li>
+            <li>8.223 · Classical Mechanics II</li>
+            <li>8.04 · Quantum Physics I</li>
+            <li>8.044 · Statistical Physics</li>
+          </ul>
+        </article>
+
+        <article class="coursework-card">
+          <h3>Electrical Engineering</h3>
+          <ul class="coursework-list">
+            <li>6.2030 · Electronics First Laboratory</li>
+            <li>6.2050 · Digital Systems Laboratory</li>
+            <li>6.2000 · Electrical Circuits: Modeling and Design of Physical Systems</li>
+            <li>6.2080 · Semiconductor Electronic Circuits</li>
+            <li>6.3000 · Signal Processing</li>
+            <li>6.2090 · Solid-State Circuits</li>
+            <li><span class="course-name">6.6020 · High-Frequency Integrated Circuits</span><span class="course-level course-level--graduate">Graduate level</span></li>
+            <li><span class="course-name">6.6300 · Electromagnetics</span><span class="course-level course-level--graduate">Graduate level</span></li>
+            <li><span class="course-name">Microwave Engineering and Antennas</span><span class="course-level course-level--coursera">Coursera</span></li>
+            <li><span class="course-name">RF and Millimeter-Wave Circuit Design</span><span class="course-level course-level--coursera">Coursera</span></li>
+          </ul>
+        </article>
+
+        <article class="coursework-card">
+          <h3>Miscellaneous Classes</h3>
+          <ul class="coursework-list">
+            <li>14.01 · Principles of Microeconomics</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span></p>
+  </footer>
 </body>
 </html>
