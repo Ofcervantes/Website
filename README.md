@@ -1,20 +1,23 @@
 # Oswin Cervantes's website
 
-## Publish a project write-up
+## Add a reference
 
-1. Sign in to GitHub, open this repository’s [project-docs folder](project-docs/), and choose **Add file → Create new file**.
-2. Give the file a descriptive name ending in `.md`, such as `filter-design.md`.
-3. Start with a single `# Project title`. The first paragraph appears below the title in the list. Use `##` for sections. Use GitHub’s **Preview** tab to check formatting.
-4. Commit to `main`, or merge your pull request into `main`. GitHub Pages builds the article, adds it to Documentation, and includes its text in search.
+| Label | Where to put it | Example |
+| --- | --- | --- |
+| Article | A Markdown file in `project-docs/articles/` | [Voltage gain in decibels](project-docs/articles/voltage-gain.md) |
+| Project | A Markdown file directly in `project-docs/` | [A code-controlled differential amplifier](project-docs/amplifier-module.md) |
+| PDF | A PDF anywhere in `project-docs/` | [On-chip LC filter design presentation](assets/LC_Filter/LCFilter_Design_Project.pdf) |
 
-The [amplifier write-up](project-docs/amplifier-module.md) is a working example. To revise an article, edit its Markdown file and commit again. Keep its filename to preserve the published URL.
+For Markdown, start with `# Your title`. The first paragraph appears in the list. To add a picture, put it next to the file and write `![Circuit diagram](circuit.png)`. The first picture also becomes the thumbnail. A new PDF takes its title from its filename, so `lab-notes.pdf` appears as “lab notes”.
 
-To include an image, save it alongside the Markdown file (or in a subfolder) and reference it where it belongs, for example `![Amplifier circuit schematic](images/amplifier.png)`. The first image also appears as the article’s thumbnail in Documentation. Images are optional.
+Commit and push to `main` to publish. The site adds the entry to Documentation and assigns its label automatically.
 
-## Edit the site
+## Learn the code
 
-- Update the profile, contact details, and coursework in `site.json`. Keep the corresponding HTML in `index.html` in sync for readers with JavaScript disabled.
-- Update PDF titles and links in `projects.json` and their fallback list in `documentation.html`. The build script stages the site's public files and assets.
+- [documentation.html](documentation.html) contains the search box, type dropdown, and list. [search.js](search.js) hides rows that don’t match.
+- [index.html](index.html) lays out About. [style.css](style.css) styles both pages. [gallery.js](gallery.js) advances the paintings every six seconds.
+- [site.json](site.json) holds the profile and coursework. [script.js](script.js) displays them. Keep the built-in About text in sync for readers with JavaScript disabled.
+- [build_projects.py](scripts/build_projects.py) turns Markdown into pages and lists the PDFs. [projects.json](projects.json) supplies the titles and links for the original presentation PDFs.
 
 ## Preview locally
 
@@ -26,7 +29,7 @@ python scripts/build_projects.py
 python -m http.server 8000 --directory _site
 ```
 
-Rebuild after editing a Markdown file to refresh the local article and search index.
+Run the build again after editing a file, then refresh the page.
 
 ## Painting credits
 

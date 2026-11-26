@@ -1,17 +1,18 @@
 /* Shared typography, palette, and layout. Content is managed in JSON. */
 :root {
   color-scheme: light;
-  --background: #f9f8f5;
-  --surface: #fffefa;
-  --surface-soft: #f0efeb;
+  --background: #fafaf8;
+  --surface: #eddfcd;
+  --surface-soft: #d8c8ae;
   --text: #303840;
   --heading: #17232e;
-  --muted: #59636d;
-  --line: #dddcd5;
-  --line-strong: #818a91;
-  --accent: #234c9b;
-  --accent-hover: #173777;
-  --accent-soft: #e9eef9;
+  --muted: #5c554a;
+  --line: #c2b198;
+  --line-strong: #81715e;
+  --accent: #24573d;
+  --accent-hover: #173d2a;
+  --accent-soft: #ceddcc;
+  accent-color: var(--accent);
   --typeface: system-ui, -apple-system, "Segoe UI", sans-serif;
   --display: Georgia, "Times New Roman", serif;
   --measure: 840px;
@@ -146,7 +147,7 @@ ul, ol { padding-left: 1.3em; }
 .profile-copy { min-width: 0; }
 .profile-copy h1 { text-wrap: balance; }
 .profile-photo {
-  width: clamp(96px, 14vw, 132px);
+  width: clamp(168px, 24vw, 220px);
   aspect-ratio: 5 / 6;
   object-fit: cover;
   border-radius: 10px;
@@ -284,6 +285,17 @@ ul, ol { padding-left: 1.3em; }
   font-size: .95rem;
 }
 .search-field input::-webkit-search-cancel-button { appearance: none; }
+.search-field input::placeholder { color: var(--muted); opacity: 1; }
+.search-field select {
+  height: 44px;
+  padding-inline: 8px;
+  border: 0;
+  border-inline-start: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--heading);
+  font-size: .875rem;
+}
+.search-field select:focus-visible { outline-offset: -3px; }
 .search-field button {
   min-height: 40px;
   margin-right: 2px;
@@ -322,7 +334,7 @@ ul, ol { padding-left: 1.3em; }
   .profile { gap: 8px 12px; }
   .profile-copy { display: contents; }
   .profile-copy h1 { grid-area: 1 / 1; align-self: center; margin: 0; text-wrap: initial; }
-  .profile-photo { grid-area: 1 / 2; width: clamp(68px, 18vw, 92px); border-radius: 7px; }
+  .profile-photo { grid-area: 1 / 2; width: clamp(112px, 30vw, 150px); border-radius: 7px; }
   .profile-copy > p, .social-links { grid-column: 1 / -1; margin: 0; }
   .coursework-grid { grid-template-columns: 1fr; }
 }

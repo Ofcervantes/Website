@@ -8,16 +8,16 @@ from datetime import date
 from html import escape
 from pathlib import Path
 from textwrap import shorten
-from urllib.parse import quote, urljoin, urlsplit, urlunsplit
+from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 
 from markdown_it import MarkdownIt
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MARKER = "<!-- project-articles -->"
 PUBLIC_FILES = (
     "index.html", "about.html", "documentation.html", "projects.html", "portfolio.html",
-    "notes.html", "style.css", "script.js", "site.json", "projects.json", "CNAME", ".nojekyll",
+    "notes.html", "style.css", "script.js", "gallery.js", "search.js",
+    "site.json", "projects.json", "CNAME", ".nojekyll",
     "assets/af-logo.png", "assets/oswin-profile.png",
     "assets/backgrounds/friedrich-the-lonely-tree.webp",
     "assets/backgrounds/friedrich-the-lonely-tree-portrait.webp",
@@ -25,9 +25,6 @@ PUBLIC_FILES = (
     "assets/backgrounds/friedrich-evening-portrait.webp",
     "assets/paintings/two-men-contemplating-the-moon.webp",
     "assets/paintings/the-sea-of-ice.webp",
-    "assets/Amplifier_Module/Amplifier_Module_FinalReport.pdf",
-    "assets/LC_Filter/LCFilter_Design_Project.pdf",
-    "assets/Volteon/Amazon_Project_Volteon.pdf",
 )
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".avif", ".svg"}
 MARKDOWN = MarkdownIt("commonmark", {"html": False}).enable(["table", "strikethrough"])
@@ -103,7 +100,7 @@ def render_project(source, relative, template, output):
     page = re.sub(r"<main\b[^>]*>.*?</main>", lambda _: article, template, count=1, flags=re.S)
     page = page.replace("<head>", '<head>\n  <base href="/">', 1)
     page = page.replace('href="#main-content"', f'href="{escape(url)}#main-content"', 1)
-    page = re.sub(r"<title>.*?</title>", lambda _: f"<title>{escape(title)} — Project documentation</title>", page, count=1)
+    page = re.sub(r"<title>.*?</title>", lambda _: f"<title>{escape(title)} — Documentation</title>", page, count=1)
     page = re.sub(r'<meta name="description" content="[^"]*">', lambda _: f'<meta name="description" content="{escape(summary or title)}">', page, count=1)
     destination = output / relative.with_suffix(".html")
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -125,42 +122,118 @@ def article_date(path):
     return date.min
 
 
+def copy_public_file(relative, output):
+    destination = output / relative
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / relative, destination)
+
+
+def project_pdfs(output):
+    pdfs = {}
+    projects = json.loads((ROOT / "projects.json").read_text(encoding="utf-8-sig"))["projects"]
+    for project in projects:
+        name = project["name"]
+        keywords = project.get("keywords", "")
+        if isinstance(keywords, list):
+            keywords = " ".join(keywords)
+        search = f"{name} {keywords}".strip()
+        for link in project.get("links", []):
+            href = urljoin("/", link["url"].strip())
+            url = urlsplit(href)
+            if not url.path.lower().endswith(".pdf"):
+                continue
+            if url.scheme not in ("", "http", "https"):
+                raise ValueError(f"Invalid PDF link in {name}: {href}")
+            title = re.sub(r"\s*\(PDF\)$", "", link.get("label") or name, flags=re.I).strip()
+            key = href
+            if not url.scheme and not url.netloc:
+                source = (ROOT / unquote(url.path).lstrip("/")).resolve()
+                if source.suffix.lower() != ".pdf":
+                    raise ValueError(f"Expected a PDF for {href}")
+                relative = source.relative_to(ROOT)
+                copy_public_file(relative, output)
+                key = "/" + quote(relative.as_posix())
+                href = urlunsplit(("", "", key, url.query, url.fragment))
+            record = pdfs.setdefault(key, {"title": title, "url": href, "keywords": []})
+            record["keywords"].append(search)
+    return pdfs
+
+
+def document_row(kind, title, url, text="", *, summary="", thumbnail="", published=date.min):
+    label = "PDF" if kind == "pdf" else kind.title()
+    if published != date.min:
+        label += f" · {published.isoformat()}"
+    hidden = " hidden" if kind in ("about", "coursework") else ""
+    image = (f'<img class="document-thumbnail" src="{escape(thumbnail)}" alt="" loading="lazy" '
+             'width="96" height="72">' if thumbnail else "")
+    excerpt = f'<span class="document-summary">{escape(summary)}</span>' if summary else ""
+    return (f'<li data-type="{kind}" data-search="{escape(text)}"{hidden}><a href="{escape(url)}">{image}'
+            f'<span class="document-title">{escape(title)}</span><span class="document-format">{label}</span>'
+            f'{excerpt}</a></li>')
+
+
+def about_rows(settings):
+    profile = settings.get("profile")
+    if profile:
+        yield document_row("about", f'About {profile.get("fullName", "")}'.strip(), "index.html",
+                           f'{profile.get("role", "")} {profile.get("statement", "")}')
+    paintings = settings.get("paintings")
+    if paintings:
+        text = " ".join([paintings.get("artist", ""), *paintings.get("titles", [])])
+        yield document_row("about", "My favorite paintings", "index.html#favorite-paintings", text)
+    for index, group in enumerate(settings.get("coursework", []), start=1):
+        if not isinstance(group, dict) or not isinstance(group.get("items"), list):
+            continue
+        name = group.get("group") or group.get("name") or ""
+        for course in group["items"]:
+            if not isinstance(course, dict):
+                course = {"label": course}
+            parts = (course.get("code"), course.get("title"))
+            title = str(course.get("label") or " · ".join(str(part) for part in parts if part)).strip()
+            if title:
+                yield document_row("coursework", title, f"index.html#coursework-{index}",
+                                   f'{name} {course.get("level") or ""}')
+
+
 def build(output):
     for name in PUBLIC_FILES:
-        destination = output / name
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT / name, destination)
+        copy_public_file(name, output)
 
     template = (ROOT / "documentation.html").read_text(encoding="utf-8-sig")
-    if template.count(MARKER) != 1:
-        raise ValueError(f"Expected one {MARKER} in documentation.html")
+    marker = "<!-- document-list -->"
+    if template.count(marker) != 1:
+        raise ValueError(f"Expected one {marker} in documentation.html")
     sources = ROOT / "project-docs"
     articles = []
+    pdfs = project_pdfs(output)
     for source in sorted(sources.rglob("*")):
         relative = source.relative_to(ROOT)
         if source.is_symlink() or not source.is_file() or any(part.startswith(".") for part in relative.parts):
             continue
         if source.suffix.lower() == ".md":
             record = render_project(source, relative, template, output)
+            record["type"] = "article" if relative.parts[1] == "articles" else "project"
             articles.append((article_date(source), record))
+        elif source.suffix.lower() == ".pdf":
+            url = "/" + quote(relative.as_posix())
+            if url not in pdfs:
+                copy_public_file(relative, output)
+                title = re.sub(r"[-_]+", " ", source.stem).strip()
+                pdfs[url] = {"title": title, "url": url, "keywords": []}
         elif source.suffix.lower() in IMAGE_EXTENSIONS:
-            (output / relative).parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, output / relative)
+            copy_public_file(relative, output)
 
     articles.sort(key=lambda item: (-item[0].toordinal(), item[1]["title"].casefold()))
-    rows = []
-    for published, record in articles:
-        title, summary, url = (escape(record[key]) for key in ("title", "summary", "url"))
-        date_label = published.isoformat() if published != date.min else "Article"
-        excerpt = f'<span class="document-summary">{summary}</span>' if summary else ""
-        image = (f'<img class="document-thumbnail" src="{escape(record["thumbnail"])}" alt="" '
-                 'loading="lazy" width="96" height="72">' if "thumbnail" in record else "")
-        rows.append(f'<li><a href="{url}">{image}<span class="document-title">{title}</span>'
-                    f'<span class="document-format">{date_label}</span>{excerpt}</a></li>')
-    (output / "documentation.html").write_text(template.replace(MARKER, "\n".join(rows)), encoding="utf-8")
+    rows = [document_row(record["type"], record["title"], record["url"], record["text"],
+                         summary=record["summary"], thumbnail=record.get("thumbnail"), published=published)
+            for published, record in articles]
+    rows.extend(document_row("pdf", pdf["title"], pdf["url"], " ".join(pdf["keywords"])) for pdf in pdfs.values())
+    settings = json.loads((ROOT / "site.json").read_text(encoding="utf-8-sig"))
+    rows.extend(about_rows(settings))
+    (output / "documentation.html").write_text(template.replace(marker, "\n".join(rows)), encoding="utf-8")
     records = [record for _, record in articles]
     (output / "project-articles.json").write_text(json.dumps(records, ensure_ascii=False), encoding="utf-8")
-    print(f"Built {len(records)} project articles in {output}")
+    print(f"Built {len(records)} Markdown pages and {len(pdfs)} PDFs in {output}")
 
 
 if __name__ == "__main__":
