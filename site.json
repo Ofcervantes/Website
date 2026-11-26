@@ -6,6 +6,10 @@
     "photo": "assets/oswin-profile.png",
     "photoAlt": "Portrait of Oswin Franco Cervantes"
   },
+  "paintings": {
+    "artist": "Caspar David Friedrich",
+    "titles": ["The Lonely Tree", "Evening", "Two Men Contemplating the Moon", "The Sea of Ice"]
+  },
   "contact": {
     "email": "mailto:cervanteso@acm.org",
     "linkedin": "https://www.linkedin.com/in/ocerv/",

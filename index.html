@@ -7,8 +7,8 @@
   <meta name="description" content="About Oswin Franco Cervantes, an MIT undergraduate studying physics and electrical engineering with computing.">
   <meta name="theme-color" content="#f9f8f5">
   <link rel="icon" type="image/png" href="assets/af-logo.png">
-  <link rel="stylesheet" href="style.css?v=20261125-4">
-  <script src="script.js?v=20261125-4" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261125-6">
+  <script src="script.js?v=20261125-6" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -38,6 +38,53 @@
         </div>
       </div>
       <img class="profile-photo" src="assets/oswin-profile.png" width="132" height="158" alt="Portrait of Oswin Franco Cervantes" data-site-src="profile.photo" data-site-alt="profile.photoAlt">
+    </section>
+
+    <section class="page-section" id="favorite-paintings" aria-labelledby="paintings-heading">
+      <div class="section-heading painting-heading">
+        <div>
+          <h2 id="paintings-heading">My favorite paintings</h2>
+          <p class="painting-artist" data-site-text="paintings.artist">Caspar David Friedrich</p>
+        </div>
+        <div class="painting-controls" role="group" aria-label="Painting gallery controls" hidden>
+          <button type="button" id="painting-playback" aria-controls="painting-track">Pause</button>
+          <button type="button" id="painting-previous" aria-label="Previous painting" aria-controls="painting-track">Previous</button>
+          <button type="button" id="painting-next" aria-label="Next painting" aria-controls="painting-track">Next</button>
+          <span id="painting-status" class="visually-hidden" role="status"></span>
+        </div>
+      </div>
+      <div class="painting-gallery" id="painting-track">
+        <figure>
+          <a href="assets/backgrounds/friedrich-the-lonely-tree.webp" aria-label="View The Lonely Tree at full size">
+            <picture>
+              <source media="(max-width: 550px)" srcset="assets/backgrounds/friedrich-the-lonely-tree-portrait.webp" width="1440" height="1800">
+              <img src="assets/backgrounds/friedrich-the-lonely-tree.webp" width="2400" height="1889" alt="A lone oak stands beside a pool in a broad valley beneath distant mountains.">
+            </picture>
+          </a>
+          <figcaption><cite data-site-text="paintings.titles.0">The Lonely Tree</cite></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/backgrounds/friedrich-evening.webp" aria-label="View Evening at full size">
+            <picture>
+              <source media="(max-width: 550px)" srcset="assets/backgrounds/friedrich-evening-portrait.webp" width="640" height="800">
+              <img src="assets/backgrounds/friedrich-evening.webp" width="1200" height="800" alt="Two small figures follow a forest path as evening light filters through the trees.">
+            </picture>
+          </a>
+          <figcaption><cite data-site-text="paintings.titles.1">Evening</cite></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/paintings/two-men-contemplating-the-moon.webp" aria-label="View Two Men Contemplating the Moon at full size">
+            <img src="assets/paintings/two-men-contemplating-the-moon.webp" width="1500" height="1214" loading="lazy" alt="Two cloaked men look toward a crescent moon beneath the branches of a leaning oak.">
+          </a>
+          <figcaption><cite data-site-text="paintings.titles.2">Two Men Contemplating the Moon</cite></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/paintings/the-sea-of-ice.webp" aria-label="View The Sea of Ice at full size">
+            <img src="assets/paintings/the-sea-of-ice.webp" width="1600" height="1243" loading="lazy" alt="Jagged slabs of ice rise above a wrecked ship beneath a pale Arctic sky.">
+          </a>
+          <figcaption><cite data-site-text="paintings.titles.3">The Sea of Ice</cite></figcaption>
+        </figure>
+      </div>
     </section>
 
     <section class="page-section coursework-section" aria-labelledby="coursework-heading">

@@ -241,6 +241,12 @@
       title: "About " + (profile.fullName || "").trim(),
       url: "index.html", format: "About", text: [profile.role, profile.statement].join(" "),
     }];
+    if (settings.paintings) {
+      records.push({
+        title: "My favorite paintings", url: "index.html#favorite-paintings", format: "About",
+        text: [settings.paintings.artist, ...settings.paintings.titles].join(" "),
+      });
+    }
     for (const [index, group] of (settings.coursework || []).entries()) {
       for (const entry of group.items || []) {
         const item = normalizeCourseworkItem(entry);
@@ -332,11 +338,87 @@
     showResults();
   }
 
+  function enablePaintingGallery() {
+    const track = document.getElementById("painting-track");
+    if (!track || track.children.length < 2) return;
+
+    const section = document.getElementById("favorite-paintings");
+    const controls = section.querySelector(".painting-controls");
+    const playback = document.getElementById("painting-playback");
+    const status = document.getElementById("painting-status");
+    const figures = Array.from(track.children);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let playing = !reducedMotion.matches;
+    let onScreen = false;
+    let touching = false;
+    let allowPlaybackFocus = false;
+    let timer;
+
+    function schedule() {
+      window.clearTimeout(timer);
+      const reading = section.contains(document.activeElement) && !allowPlaybackFocus;
+      if (!playing || !onScreen || document.hidden || controls.hidden || touching || reading) return;
+      if (window.matchMedia("(hover: hover)").matches && track.matches(":hover")) return;
+      timer = window.setTimeout(() => move(1, false), 6000);
+    }
+
+    function move(direction, manual) {
+      const step = figures[1].offsetLeft - figures[0].offsetLeft;
+      if (step <= 0) return;
+      const last = Math.round((track.scrollWidth - track.clientWidth) / step);
+      const current = Math.round(track.scrollLeft / step);
+      const next = (current + direction + last + 1) % (last + 1);
+      track.scrollTo({
+        left: next * step,
+        behavior: manual || reducedMotion.matches ? "instant" : "smooth",
+      });
+      if (manual) status.textContent = figures[next].querySelector("figcaption").textContent.trim();
+      schedule();
+    }
+
+    function updateControls() {
+      controls.hidden = track.scrollWidth <= track.clientWidth + 1;
+      playback.textContent = playing ? "Pause" : "Play";
+      playback.setAttribute("aria-label", playing ? "Pause automatic scrolling" : "Start automatic scrolling");
+      schedule();
+    }
+
+    track.classList.add("is-scrolling");
+    section.setAttribute("aria-roledescription", "carousel");
+    document.getElementById("painting-previous").addEventListener("click", () => move(-1, true));
+    document.getElementById("painting-next").addEventListener("click", () => move(1, true));
+    playback.addEventListener("click", () => {
+      playing = !playing;
+      allowPlaybackFocus = playing && document.activeElement === playback;
+      updateControls();
+    });
+    section.addEventListener("focusin", () => { allowPlaybackFocus = false; schedule(); });
+    section.addEventListener("focusout", () => queueMicrotask(schedule));
+    track.addEventListener("pointerenter", schedule);
+    track.addEventListener("pointerleave", schedule);
+    track.addEventListener("pointerdown", () => { touching = true; schedule(); });
+    window.addEventListener("pointerup", () => { touching = false; schedule(); });
+    window.addEventListener("pointercancel", () => { touching = false; schedule(); });
+    track.addEventListener("scroll", schedule, { passive: true });
+    document.addEventListener("visibilitychange", schedule);
+    reducedMotion.addEventListener("change", () => {
+      if (reducedMotion.matches) playing = false;
+      updateControls();
+    });
+    new ResizeObserver(updateControls).observe(track);
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      schedule();
+    }).observe(track);
+    updateControls();
+  }
+
   document.querySelectorAll("[data-current-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());
   });
 
   const settingsPromise = fetchJson("site.json");
+  enablePaintingGallery();
   loadSiteSettings(settingsPromise);
   enableSearch(settingsPromise);
 })();

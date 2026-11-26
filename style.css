@@ -163,6 +163,48 @@ ul, ol { padding-left: 1.3em; }
 .social-links { display: flex; flex-wrap: wrap; gap: 0 18px; }
 .social-link { display: inline-flex; align-items: center; min-height: 38px; font-size: .875rem; }
 
+.painting-artist, .painting-gallery figcaption { color: var(--muted); font-size: .875rem; }
+.painting-artist { margin: 2px 0 0; }
+.painting-heading { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; }
+.painting-controls { display: flex; gap: 4px; }
+.painting-controls button {
+  min-height: 36px;
+  padding: 3px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--accent);
+  font-size: .875rem;
+}
+.painting-controls button:hover { background: var(--accent-soft); }
+.painting-gallery {
+  --painting-gap: clamp(12px, 3vw, 24px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--painting-gap);
+}
+.painting-gallery.is-scrolling {
+  position: relative;
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - var(--painting-gap)) / 2);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+.painting-gallery figure { min-width: 0; margin: 0; scroll-snap-align: start; }
+.painting-gallery figure a:focus-visible { outline-offset: -3px; }
+.painting-gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: var(--surface-soft);
+}
+.painting-gallery a, .painting-gallery picture { display: block; }
+.painting-gallery figcaption { margin-top: 5px; }
+
 .coursework-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -272,6 +314,9 @@ ul, ol { padding-left: 1.3em; }
 .project-article th, .project-article td { padding: .4em .7em; border: 1px solid var(--line); text-align: left; }
 
 @media (max-width: 550px) {
+  .painting-gallery { grid-template-columns: minmax(0, 1fr); }
+  .painting-gallery.is-scrolling { grid-template-columns: none; grid-auto-columns: 100%; }
+  .painting-gallery img { aspect-ratio: 1; }
   .brand-label { display: none; }
   .nav-shell { min-height: 58px; }
   .profile { gap: 8px 12px; }

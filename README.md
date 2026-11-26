@@ -27,3 +27,8 @@ python -m http.server 8000 --directory _site
 ```
 
 Rebuild after editing a Markdown file to refresh the local article and search index.
+
+## Painting credits
+
+- *Two Men Contemplating the Moon* by Caspar David Friedrich, ca. 1825–30. Public-domain image from [The Metropolitan Museum of Art](https://www.metmuseum.org/art/collection/search/438417).
+- *The Sea of Ice* by Caspar David Friedrich, 1823–24, Hamburger Kunsthalle. [Museum exhibition record](https://cdfriedrich.de/en/chronicle/das-eismeer/) and [public-domain reproduction](https://commons.wikimedia.org/wiki/File:Caspar_David_Friedrich_-_Das_Eismeer_-_Hamburger_Kunsthalle.jpg).
