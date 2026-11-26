@@ -1,4 +1,4 @@
-name: Build notes & deploy
+name: Deploy website
 
 on:
   push:
@@ -23,21 +23,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Generate notes manifest
-        run: python scripts/build_notes.py
-
       - name: Assemble public site
         run: |
           mkdir -p _site
-          cp index.html about.html portfolio.html projects.html notes.html \
-            style.css script.js site.json projects.json \
-            CNAME .nojekyll _site/
-          cp -R assets notes _site/
+          cp index.html about.html documentation.html projects.html portfolio.html notes.html \
+            style.css script.js site.json projects.json CNAME .nojekyll _site/
+          cp --parents assets/af-logo.png assets/oswin-profile.png \
+            assets/Amplifier_Module/Amplifier_Module_FinalReport.pdf \
+            assets/LC_Filter/LCFilter_Design_Project.pdf \
+            assets/Volteon/Amazon_Project_Volteon.pdf _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -47,3 +41,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4
+
