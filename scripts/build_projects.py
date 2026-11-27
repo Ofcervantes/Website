@@ -18,7 +18,7 @@ PUBLIC_FILES = (
     "index.html", "about.html", "documentation.html", "projects.html", "portfolio.html",
     "notes.html", "style.css", "script.js", "gallery.js", "search.js",
     "site.json", "projects.json", "CNAME", ".nojekyll",
-    "assets/af-logo.png", "assets/oswin-profile.png",
+    "assets/af-logo.png", "assets/oswin-profile.png", "assets/oswin-portrait.webp",
     "assets/backgrounds/friedrich-the-lonely-tree.webp",
     "assets/backgrounds/friedrich-the-lonely-tree-portrait.webp",
     "assets/backgrounds/friedrich-evening.webp",
