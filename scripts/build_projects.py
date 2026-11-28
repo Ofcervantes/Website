@@ -11,11 +11,12 @@ from textwrap import shorten
 from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 
 from markdown_it import MarkdownIt
+from markdown_it.tree import SyntaxTreeNode
 
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_FILES = (
-    "index.html", "about.html", "documentation.html", "random.html", "projects.html", "portfolio.html",
+    "about.html", "documentation.html", "random.html", "projects.html", "portfolio.html",
     "notes.html", "style.css", "script.js", "gallery.js", "search.js",
     "site.json", "projects.json", "CNAME", ".nojekyll",
     "assets/af-logo.png", "assets/oswin-profile.png", "assets/oswin-portrait.webp",
@@ -177,6 +178,36 @@ def read_subjects():
     return subjects
 
 
+def selected_projects(documents):
+    """Build the homepage list from the link in each bullet of the Obsidian note."""
+    note = ROOT / "Selected projects.md"
+    tree = SyntaxTreeNode(MARKDOWN.parse(note.read_text(encoding="utf-8-sig")))
+    rows = []
+    for paragraph in tree.walk():
+        if paragraph.type != "paragraph" or paragraph.parent.type != "list_item":
+            continue
+        location = f"{note.name} line {paragraph.map[0] + 1}"
+        links = [node for node in paragraph.walk() if node.type == "link"]
+        if len(links) != 1:
+            raise ValueError(f"{location} needs one Markdown link.")
+        link = links[0]
+        path = unquote(urljoin("/", link.attrs["href"])).removeprefix("/")
+        if path not in documents:
+            raise ValueError(f"{location} links to an unpublished file: {path}")
+        url, label = documents[path]
+        title = inline_text(link).strip()
+        if not title:
+            raise ValueError(f"{location} needs a link title.")
+        href = escape(url.removeprefix("/"))
+        rows.append(f'<li><a href="{href}"><span class="document-title">{escape(title)}</span>'
+                    f'<span class="document-format">{label}</span></a></li>')
+    if not rows:
+        return ""
+    return ('<section class="page-section" aria-labelledby="projects-heading">\n'
+            '      <h2 id="projects-heading">Selected projects</h2>\n'
+            '      <ul class="document-list selected-projects">\n' + "\n".join(rows) + '\n      </ul>\n    </section>')
+
+
 def document_row(kind, title, url, text="", *, summary="", thumbnail="", published=date.min, subjects=()):
     label = "PDF" if kind == "pdf" else kind.title()
     if published != date.min:
@@ -227,6 +258,7 @@ def build(output):
     sources = ROOT / "project-docs"
     articles = []
     pdfs = project_pdfs(output)
+    documents = {}
     subjects = read_subjects()
     for source in sorted(sources.rglob("*")):
         relative = source.relative_to(ROOT)
@@ -235,6 +267,8 @@ def build(output):
         if source.suffix.lower() == ".md":
             record = render_project(source, relative, template, output)
             record["type"] = "article" if relative.parts[1] == "articles" else "project"
+            label = "Article" if record["type"] == "article" else "Project write-up"
+            documents[relative.as_posix()] = (record["url"], label)
             record["subjects"] = subjects.get(relative.as_posix(), [])
             articles.append((article_date(source), record))
         elif source.suffix.lower() == ".pdf":
@@ -253,12 +287,16 @@ def build(output):
                                  summary=record["summary"], thumbnail=record.get("thumbnail"),
                                  published=published, subjects=record["subjects"]))
     for path, pdf in pdfs.items():
+        documents[path] = (pdf["url"], "PDF")
         labels = subjects.get(path, [])
         rows.append(document_row("pdf", pdf["title"], pdf["url"], " ".join(pdf["keywords"]), subjects=labels))
     settings = json.loads((ROOT / "site.json").read_text(encoding="utf-8-sig"))
     rows.extend(search_only_rows(settings))
     page = template.replace(list_marker, "\n".join(rows))
     (output / "documentation.html").write_text(page, encoding="utf-8")
+    homepage = (ROOT / "index.html").read_text(encoding="utf-8")
+    homepage = homepage.replace("<!-- selected-projects -->", selected_projects(documents))
+    (output / "index.html").write_text(homepage, encoding="utf-8")
     records = [record for _, record in articles]
     (output / "project-articles.json").write_text(json.dumps(records, ensure_ascii=False), encoding="utf-8")
     print(f"Built {len(records)} Markdown pages and {len(pdfs)} PDFs in {output}")

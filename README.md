@@ -7,13 +7,17 @@ In Obsidian, choose **Open folder as vault** and select this repository's top-le
 After saving your changes, run these commands in a terminal from the same folder.
 
 ```sh
-git add -- project-docs subjects.json
+git add -- project-docs subjects.json "Selected projects.md"
 git diff --cached --stat
 git commit -m "Publish my latest notes"
 git push origin main
 ```
 
-The first command stages all changed notes, attachments, and subject labels. To publish one note, list its path and any new images after `git add --`. GitHub Pages rebuilds the site after the push.
+The first command stages your notes, attachments, subject labels, and homepage selections. To publish one note, list its path and any new images after `git add --`. GitHub Pages rebuilds the site after the push.
+
+## Choose the projects on About
+
+Open [Selected projects.md](<Selected projects.md>) in Obsidian. Add a bullet, type `[[`, and choose a project note or PDF from Documentation. The vault saves your choice as a Markdown link. Edit the link text to change its homepage title, or move the bullet to change its position. Removing a bullet takes it off the homepage. An empty list hides the section.
 
 ## Add a reference
 
