@@ -42,7 +42,7 @@ Use any subject name, including a phrase like `Applied Math`. The labels appear 
 ## Learn the code
 
 - [documentation.html](documentation.html) contains the search box, filters, and list. [search.js](search.js) hides rows that don’t match.
-- [index.html](index.html) lays out About. [style.css](style.css) styles both pages. [gallery.js](gallery.js) advances the paintings every six seconds.
+- [index.html](index.html) lays out About. [random.html](random.html) holds the favorite paintings and music player. [style.css](style.css) styles the site. [gallery.js](gallery.js) advances the paintings every six seconds.
 - [site.json](site.json) holds the profile and coursework. [script.js](script.js) displays them. Keep the built-in About text in sync for readers with JavaScript disabled.
 - [build_projects.py](scripts/build_projects.py) turns Markdown into pages and lists the PDFs. [projects.json](projects.json) supplies the titles and links for the original presentation PDFs.
 

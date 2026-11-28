@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Random — Oswin Franco Cervantes</title>
+  <meta name="description" content="Oswin’s favorite paintings by Caspar David Friedrich and the Oswin Mix music playlist.">
+  <meta name="theme-color" content="#fafaf8">
+  <link rel="icon" type="image/png" href="assets/af-logo.png">
+  <link rel="stylesheet" href="style.css?v=20261128-1">
+  <script type="module" src="script.js"></script>
+  <script type="module" src="gallery.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Oswin Cervantes home">
+        <img class="brand-logo" src="assets/af-logo.png" width="28" height="28" alt="">
+        <span class="brand-label">Oswin Cervantes</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="index.html">About</a>
+        <a href="documentation.html">Documentation</a>
+        <a href="random.html" aria-current="page">Random</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="page-main">
+    <h1>Random</h1>
+
+    <section class="page-section" id="favorite-paintings" aria-labelledby="paintings-heading">
+      <div class="section-heading painting-heading">
+        <div>
+          <h2 id="paintings-heading">My favorite paintings</h2>
+          <p class="painting-artist" data-site-text="paintings.artist">Caspar David Friedrich</p>
+        </div>
+        <div class="painting-controls" role="group" aria-label="Painting gallery controls" hidden>
+          <button type="button" id="painting-playback" aria-controls="painting-track">Pause</button>
+          <button type="button" id="painting-previous" aria-label="Previous painting" aria-controls="painting-track">Previous</button>
+          <button type="button" id="painting-next" aria-label="Next painting" aria-controls="painting-track">Next</button>
+          <span id="painting-status" class="visually-hidden" role="status"></span>
+        </div>
+      </div>
+      <div class="painting-gallery" id="painting-track">
+        <figure>
+          <a href="assets/backgrounds/friedrich-the-lonely-tree.webp" aria-label="View The Lonely Tree at full size">
+            <picture>
+              <source media="(max-width: 550px)" srcset="assets/backgrounds/friedrich-the-lonely-tree-portrait.webp" width="1440" height="1800">
+              <img src="assets/backgrounds/friedrich-the-lonely-tree.webp" width="2400" height="1889" alt="A lone oak stands beside a pool in a broad valley beneath distant mountains.">
+            </picture>
+          </a>
+          <figcaption><cite data-site-text="paintings.titles.0">The Lonely Tree</cite></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/backgrounds/friedrich-evening.webp" aria-label="View Evening at full size">
+            <picture>
+              <source media="(max-width: 550px)" srcset="assets/backgrounds/friedrich-evening-portrait.webp" width="640" height="800">
+              <img src="assets/backgrounds/friedrich-evening.webp" width="1200" height="800" alt="Two small figures follow a forest path as evening light filters through the trees.">
+            </picture>
+          </a>
+          <figcaption><cite data-site-text="paintings.titles.1">Evening</cite></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/paintings/two-men-contemplating-the-moon.webp" aria-label="View Two Men Contemplating the Moon at full size">
+            <img src="assets/paintings/two-men-contemplating-the-moon.webp" width="1500" height="1214" loading="lazy" alt="Two cloaked men look toward a crescent moon beneath the branches of a leaning oak.">
+          </a>
+          <figcaption><cite data-site-text="paintings.titles.2">Two Men Contemplating the Moon</cite></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/paintings/the-sea-of-ice.webp" aria-label="View The Sea of Ice at full size">
+            <img src="assets/paintings/the-sea-of-ice.webp" width="1600" height="1243" loading="lazy" alt="Jagged slabs of ice rise above a wrecked ship beneath a pale Arctic sky.">
+          </a>
+          <figcaption><cite data-site-text="paintings.titles.3">The Sea of Ice</cite></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="page-section" id="playlist" aria-labelledby="playlist-heading">
+      <h2 id="playlist-heading">Oswin Mix</h2>
+      <iframe class="playlist-player" title="Oswin Mix YouTube playlist"
+        src="https://www.youtube.com/embed/videoseries?list=PLQFCMoMQoARA"
+        width="640" height="360" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+      <div class="social-links">
+        <a class="social-link" href="https://www.youtube.com/playlist?list=PLQFCMoMQoARA">Open playlist on YouTube</a>
+        <a class="social-link" href="https://www.youtube.com/@Oswin_Cervantes" target="_blank" rel="noopener noreferrer" data-site-href="contact.youtube">YouTube channel</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p>© <span data-current-year>2026</span> <span data-site-text="profile.fullName">Oswin Franco Cervantes</span></p>
+  </footer>
+</body>
+</html>

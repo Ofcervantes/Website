@@ -31,10 +31,10 @@ function filterList() {
     const text = normalize([row.textContent, type, row.dataset.search].join(" "));
     const matchesType = typeFilter.value === "all" || typeFilter.value === type;
     const matchesSubject = !subject || subjectsOn(row).includes(subject);
-    // About and coursework appear only when the reader searches for them.
+    // Browsing shows documents. A text search also includes links to other pages.
     const matchesQuery = query
       ? words.length > 0 && words.every(word => text.includes(word))
-      : type !== "about" && type !== "coursework";
+      : !row.hasAttribute("data-search-only");
     row.hidden = !(matchesType && matchesSubject && matchesQuery);
     if (!row.hidden) count++;
   }

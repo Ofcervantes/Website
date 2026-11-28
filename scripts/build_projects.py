@@ -15,7 +15,7 @@ from markdown_it import MarkdownIt
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_FILES = (
-    "index.html", "about.html", "documentation.html", "projects.html", "portfolio.html",
+    "index.html", "about.html", "documentation.html", "random.html", "projects.html", "portfolio.html",
     "notes.html", "style.css", "script.js", "gallery.js", "search.js",
     "site.json", "projects.json", "CNAME", ".nojekyll",
     "assets/af-logo.png", "assets/oswin-profile.png", "assets/oswin-portrait.webp",
@@ -181,7 +181,7 @@ def document_row(kind, title, url, text="", *, summary="", thumbnail="", publish
     label = "PDF" if kind == "pdf" else kind.title()
     if published != date.min:
         label += f" · {published.isoformat()}"
-    hidden = " hidden" if kind in ("about", "coursework") else ""
+    hidden = " data-search-only hidden" if kind in ("about", "coursework", "random") else ""
     subject_labels = "".join(f' <span class="document-subject">{escape(subject)}</span>' for subject in subjects)
     image = (f'<img class="document-thumbnail" src="{escape(thumbnail)}" alt="" loading="lazy" '
              'width="96" height="72">' if thumbnail else "")
@@ -192,7 +192,7 @@ def document_row(kind, title, url, text="", *, summary="", thumbnail="", publish
             f'{excerpt}</a></li>')
 
 
-def about_rows(settings):
+def search_only_rows(settings):
     profile = settings.get("profile")
     if profile:
         yield document_row("about", f'About {profile.get("fullName", "")}'.strip(), "index.html",
@@ -200,8 +200,8 @@ def about_rows(settings):
     paintings = settings.get("paintings")
     if paintings:
         text = " ".join([paintings.get("artist", ""), *paintings.get("titles", [])])
-        yield document_row("about", "My favorite paintings", "index.html#favorite-paintings", text)
-    yield document_row("about", "Oswin Mix", "index.html#playlist", "YouTube music playlist")
+        yield document_row("random", "My favorite paintings", "random.html#favorite-paintings", text)
+    yield document_row("random", "Oswin Mix", "random.html#playlist", "YouTube music playlist")
     for index, group in enumerate(settings.get("coursework", []), start=1):
         if not isinstance(group, dict) or not isinstance(group.get("items"), list):
             continue
@@ -256,7 +256,7 @@ def build(output):
         labels = subjects.get(path, [])
         rows.append(document_row("pdf", pdf["title"], pdf["url"], " ".join(pdf["keywords"]), subjects=labels))
     settings = json.loads((ROOT / "site.json").read_text(encoding="utf-8-sig"))
-    rows.extend(about_rows(settings))
+    rows.extend(search_only_rows(settings))
     page = template.replace(list_marker, "\n".join(rows))
     (output / "documentation.html").write_text(page, encoding="utf-8")
     records = [record for _, record in articles]

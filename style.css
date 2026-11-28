@@ -250,6 +250,7 @@ ul, ol { padding-left: 1.3em; }
 
 /* Documentation */
 .document-list { margin: 25px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.selected-projects { margin-top: 0; border-top: 0; }
 .document-list li { border-bottom: 1px solid var(--line); }
 .document-list a {
   display: grid;
